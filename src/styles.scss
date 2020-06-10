@@ -1,0 +1,242 @@
+@import '~@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+/* You can add global styles to this file, and also import other style files */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #45b9ff 0%,#8b41fd 100%);
+  color: #fff;
+  box-sizing: border-box;
+  min-width: 1000px;
+  padding-bottom: 50px;
+}
+
+.text-center {
+  text-align: center;
+}
+.clearfix {
+  &:after, &:before {
+    content: '';
+    display: table;
+    width: 100%;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-input-placeholder {
+  color: #ffffff;
+}
+input:-ms-input-placeholder {
+  color: #ffffff;
+}
+input::-ms-input-placeholder {
+  color: #ffffff;
+}
+input::placeholder {
+  color: #ffffff;
+}
+
+
+
+.mat-dialog-container {
+  background: #8745fc;
+  background: -moz-linear-gradient(-45deg,  #8745fc 0%, #676dff 100%);
+  background: -webkit-linear-gradient(-45deg,  #8745fc 0%,#676dff 100%);
+  background: linear-gradient(135deg,  #8745fc 0%,#676dff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8745fc', endColorstr='#676dff',GradientType=1 );
+  border-radius: 3px;
+  color: #fff;
+}
+.dialog-block_title {
+  font-weight: bold;
+  font-size: 26px;
+  margin-bottom: 0.5em;
+}
+.dialog-block_content_item {
+  padding: 20px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.dialog-block_content_item + .dialog-block_content_item {
+  margin-top: 15px;
+}
+.modal-item_table {
+  width: 100%;
+  border: 0 none;
+  font-weight: bold;
+  line-height: 32px;
+  td {
+    padding: 5px 0;
+  }
+}
+.mat-dialog-container {
+  position: relative;
+}
+.dialog-close {
+  position: absolute;
+  right: 6px;
+  top: 2px;
+  width: 19px;
+  height: 24px;
+  cursor: pointer;
+  &:after, &:before {
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+    content: '';
+    display: block;
+  }
+  &:after {
+    top: 11px;
+    transform: rotate(45deg);
+  }
+  &:before {
+    top: 13px;
+    transform: rotate(-45deg);
+  }
+}
+
+.chapter-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
+
+
+
+
+
+.lds-ellipsis {
+  display: block;
+  top: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  &.inline {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .btn {
+    position: relative;
+  }
+  .btn & {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+  }
+  ~ * {
+    visibility: hidden;
+  }
+}
+.lds-ellipsis-container {
+  position: relative;
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 62px;
+  span {
+    position: absolute;
+    top: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+  }
+  &.min {
+    width: 31px;
+    span {
+      margin-top: -3px;
+      width: 5px;
+      height: 5px;
+      &:nth-child(1) {
+        left: 3px;
+        animation: lds-ellipsis1min 0.4s infinite;
+      }
+      &:nth-child(2) {
+        left: 3px;
+        animation: lds-ellipsis2min 0.4s infinite;
+      }
+      &:nth-child(3) {
+        left: 13px;
+        animation: lds-ellipsis2min 0.4s infinite;
+      }
+      &:nth-child(4) {
+        left: 23px;
+        animation: lds-ellipsis3min 0.4s infinite;
+      }
+      animation-timing-function: cubic-bezier(1, 1, 0, 0) !important;
+    }
+  }
+
+}
+
+.lds-ellipsis-container span:nth-child(1) {
+  left: 6px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis-container span:nth-child(2) {
+  left: 6px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis-container span:nth-child(3) {
+  left: 26px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis-container span:nth-child(4) {
+  left: 45px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(19px, 0);
+  }
+}
+
+.as-link {
+  cursor: pointer;
+  border-bottom: 1px dotted;
+  margin-left: 5px;
+  &:hover {
+    color: #ff0;
+    border-bottom: 0 none;
+  }
+}
