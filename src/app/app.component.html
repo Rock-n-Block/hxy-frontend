@@ -131,9 +131,9 @@
   </form>
 
 
-  <form class="calculate-controls calculate-controls__2 with-bottom-label"
+  <form class="calculate-controls calculate-controls__2 with-bottom-label left-align"
         *ngIf="coinsDecimals && balances"
-        #wantForm="ngForm" name="want-form" [ngClass]="{disabled: form2Progress}">
+        #wantForm="ngForm" name="want-form" [ngClass]="{disabled: form2Progress || HXYBalance == 0}">
     <div class="calculate-controls_element calculate-controls_label">
       Freeze
     </div>
@@ -232,11 +232,12 @@
     </div>
     <div class="flex-block left-align">
 
-      <div class="calculate-controls_element calculate-controls_label" *ngIf="notClaimedState">
-        <small>Нужно что-нибудь жмякнуть, чтобы узнать свои дивиденды</small>
+      <div class="calculate-controls_element calculate-controls_label" *ngIf="expiredIn?.requireRequest">
+        <small>Dividends will be calculated after the first Claim</small>
       </div>
 
-      <div class="calculate-controls_element calculate-controls_label no-padding" *ngIf="dividends && coinsDecimals">
+      <div class="calculate-controls_element calculate-controls_label no-padding"
+           *ngIf="dividends && coinsDecimals && !expiredIn?.requireRequest">
         <div class="divided-coins">
           <span *ngFor="let dividend of dividends;" class="divided-coins_item">
             <img class="divided-coins_item_icon" [src]="coinsIcons[dividend.coin]">
@@ -280,7 +281,7 @@
     <tbody>
     <tr>
       <td class="dividends-info-table_title-row">Collected now</td>
-      <td class="dividends-info-table_val" *ngFor="let coinVal of dividendsState.today">
+      <td class="dividends-info-table_val" *ngFor="let coinVal of dividendsState.todayDividendsTotal">
         {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
       </td>
     </tr>
@@ -291,15 +292,22 @@
             'dividends-info-table_val__up': coinVal.profit > 0,
             'dividends-info-table_val__down': coinVal.profit < 0
           }"
-          *ngFor="let coinVal of dividendsState.availableTotal">
+          *ngFor="let coinVal of dividendsState.previousDividendsTotal">
         {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
-        <!--<span class="dividends-info-table_val__percent">{{coinVal.profit}}%</span>-->
+        <span class="dividends-info-table_val__percent">{{coinVal.profit}}%</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="dividends-info-table_title-row">С чем сравниваю</td>
+      <td class="dividends-info-table_val"
+          *ngFor="let coinVal of dividendsState.beforePreviousDividendsTotal">
+        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
       </td>
     </tr>
     <tr>
       <td class="dividends-info-table_title-row">Distributed Yesterday</td>
       <td class="dividends-info-table_val"
-          *ngFor="let coinVal of dividendsState.claimedTotal">
+          *ngFor="let coinVal of dividendsState.claimedDividendsTotal">
         {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
       </td>
     </tr>

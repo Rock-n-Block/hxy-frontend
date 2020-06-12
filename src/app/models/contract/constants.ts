@@ -2,12 +2,12 @@ export const ContractConstants = {
   ADDRESSES: {
     kovan: {
       HEX: '0x19C165F2093f2CF5F26b9b2F3393271f63c745DF',
-      HXY: '0x117c3d6cBd63f05cDF8D7Dee28C36Bd69aeCD06A',
-      USDC: '0xA94ec33407235B9F96668Fe6F6E452091418F4F4',
+      HXY: '0x369C942c692ddB20E116D0BCf3dE52009Cb48D2E',
+      USDC: '0x05F0a875C881D90D3cC7464c9d914678572FDa1A',
       ETH_EXCHANGE: '0x7266EB2D7a74aDf9b189A69d5fF05450C88e60aA',
       HEX_EXCHANGE: '0x6b57b218D8E2D211Ffb6128696Ad9b1cB56b20f9',
-      USDC_EXCHANGE: '0x7e55FfC5b65cdac16c5C073236e78b1561AD291c',
-      DIVIDENDS: '0xd48a71a307CFBE1691D6032534E6a7F033c9E730',
+      USDC_EXCHANGE: '0x9eF2145c5b6D5EDF86779a38c57892eb9096bdA3',
+      DIVIDENDS: '0xc16BE82301bb417B9C888503fcd04Adb7749F8f2',
       UNISWAP: '0x5C40C8b461f43Ac559c5A335f93908FAe6f62Ab2',
       UNISWAP_USDC: '0xFcA3e24A438D3029E3f5e57489DA4fb05A9D7600'
     },
@@ -3554,6 +3554,20 @@ export const ContractConstants = {
       },
       {
         inputs: [],
+        name: 'getBeforePreviousDividendsTotal',
+        outputs: [
+          {
+            internalType: 'uint256[4]',
+            name: '',
+            type: 'uint256[4]'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
         name: 'getPreviousDividendsTotal',
         outputs: [
           {
@@ -3679,6 +3693,20 @@ export const ContractConstants = {
       {
         inputs: [],
         name: 'getHxyTokenAddress',
+        outputs: [
+          {
+            internalType: 'address',
+            name: '',
+            type: 'address'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
+        name: 'getUsdcTokenAddress',
         outputs: [
           {
             internalType: 'address',

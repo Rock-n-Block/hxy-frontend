@@ -110,8 +110,8 @@ export class BigNumberDirective implements OnInit {
         }
       }
 
-      modelValue = modelValue.toString();
-
+      modelValue = modelValue.toString(10);
+      // console.log(modelValue);
       if (JSON.stringify(errors) === '{}') {
         this.control.control.setValue(modelValue, {
           emitEvent: false

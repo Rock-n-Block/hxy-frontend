@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 
 // const oneDaySeconds = 86400;
 const oneDaySeconds = 300;
-const dividendsKeys = ['HEX', 'HXY', 'ETH', 'USDC'];
+const dividendsKeys = ['ETH', 'HXY', 'HEX', 'USDC'];
 
 export class Contract {
 
@@ -73,6 +73,29 @@ export class Contract {
     );
   }
 
+
+  private checkTx(tx, resolve, reject) {
+    this.web3Service.Web3.eth.getTransaction(tx.transactionHash).then((txInfo) => {
+      if (txInfo.blockNumber) {
+        console.log(txInfo);
+        resolve(tx);
+      } else {
+        setTimeout(() => {
+          this.checkTx(tx, resolve, reject);
+        }, 2000);
+      }
+    }, reject);
+  }
+
+  private checkTransaction(tx) {
+    return new Promise((resolve, reject) => {
+      this.checkTx(tx, resolve, reject);
+    });
+  }
+
+
+
+
   public getCoinsDecimals() {
     const promises = [
       this.HEXTokenContract.methods.decimals().call().then((result: any) => {
@@ -137,7 +160,6 @@ export class Contract {
       return Promise.all(promises);
   }
 
-
   public getAmountsLimits() {
     const promises = [
       this.HEXExchangeContract.methods.getMinAmount().call().then((result: any) => {
@@ -199,6 +221,8 @@ export class Contract {
       value: amount,
       from: this.ETHExchangeContract.givenProvider.selectedAddress,
       to: this.ETHExchangeContract.options.address
+    }).then((res) => {
+      return this.checkTransaction(res);
     });
   }
 
@@ -210,6 +234,8 @@ export class Contract {
       }).then(() => {
         this.HEXExchangeContract.methods.exchangeHex(amount).send({
           from: fromAccount
+        }).then((res) => {
+          return this.checkTransaction(res);
         }).then(resolve, reject);
       }, reject);
     });
@@ -222,10 +248,14 @@ export class Contract {
       this.USDCTokenContract.methods.approve(this.USDCExchangeContract.options.address, amount).send({
         from: fromAccount
       }).then(() => {
-        this.USDCExchangeContract.methods.exchangeUSDC(amount).send({
+        this.USDCExchangeContract.methods.exchangeUsdc(amount).send({
           from: fromAccount
+        }).then((res) => {
+          return this.checkTransaction(res);
         }).then(resolve, reject);
-      }, reject);
+      }, reject).catch((err) => {
+        console.log(err);
+      });
     });
   }
 
@@ -239,12 +269,9 @@ export class Contract {
 
         return this.getHexPrice().then((hexPrice: string) => {
           rates.ETH = rates.HEX.times(new BigNumber(hexPrice).div(Math.pow(10, this.coinsDecimals.HEX)));
-
           return this.getUSDCPrice().then((usdcPrice: string) => {
-
-            // Fixme USDC decimals
-            rates.USDC = rates.ETH.div(new BigNumber(usdcPrice).div(Math.pow(10, 8)));
-
+            console.log(this.coinsDecimals.USDC);
+            rates.USDC = rates.ETH.div(new BigNumber(usdcPrice).div(Math.pow(10, this.coinsDecimals.USDC)));
             const prices = [];
             for (const coin in rates) {
               prices.push({coin, rate: new BigNumber(1).div(rates[coin]).toString(10)});
@@ -254,15 +281,11 @@ export class Contract {
         });
       });
     };
-    this.getUSDCPrice().then((res) => {
-      console.log(res);
-    });
     if (!this.coinsDecimals) {
       return this.getCoinsDecimals().then(getPrices);
     }
     return getPrices();
   }
-
 
 
   public getUSDCPrice() {
@@ -279,17 +302,25 @@ export class Contract {
 
 
   public getRemainingRecordTime() {
-    return this.DividendsContract.methods.getRecordTime().call().then((r) => {
-      let leftSeconds = r % oneDaySeconds - Math.round((new Date().getTime() / 1000) % oneDaySeconds);
+    return this.DividendsContract.methods.getRecordTime().call().then((r: any) => {
+      r = +r;
+      const now = Math.round(new Date().getTime() / 1000);
+      let leftSeconds = r % oneDaySeconds - now % oneDaySeconds;
       if (leftSeconds < 0) {
         leftSeconds += oneDaySeconds;
       }
-      return {
-        left: leftSeconds,
-        latest: r  - oneDaySeconds + 1,
-        next: Math.round((new Date().getTime() / 1000)) + leftSeconds,
-        period: oneDaySeconds
-      };
+
+      return this.DividendsContract.methods.getUserLastClaim(
+        this.DividendsContract.givenProvider.selectedAddress
+      ).call().then((lastClaim) => {
+        return {
+          left: leftSeconds,
+          latest: +lastClaim,
+          next: now + leftSeconds,
+          period: oneDaySeconds,
+          requireRequest: now > r
+        };
+      });
     });
   }
 
@@ -317,6 +348,8 @@ export class Contract {
     const fromAccount = this.HEXTokenContract.givenProvider.selectedAddress;
     return this.HXYTokenContract.methods.freezeHxy(amount).send({
       from: fromAccount
+    }).then((res) => {
+      return this.checkTransaction(res);
     });
   }
 
@@ -368,7 +401,7 @@ export class Contract {
         });
         return Promise.all(allFreezingsPromises).then((freezings) => {
           return freezings.filter((freezing: any) => {
-            return +freezing.id > 0;
+            return +freezing.freezeAmount > 0;
           }).sort((a: any, b: any) => {
             return +a.endDateTime > +b.endDateTime ? 1 : -1;
           });
@@ -380,18 +413,24 @@ export class Contract {
   public unfreeze(freezingDate) {
     return this.HXYTokenContract.methods.releaseFrozen(freezingDate).send({
       from: this.HXYTokenContract.givenProvider.selectedAddress
+    }).then((res) => {
+      return this.checkTransaction(res);
     });
   }
 
   public refreezeHxy(freezingDate) {
     return this.HXYTokenContract.methods.refreezeHxy(freezingDate).send({
       from: this.HXYTokenContract.givenProvider.selectedAddress
+    }).then((res) => {
+      return this.checkTransaction(res);
     });
   }
 
   public claimDividends() {
     return this.DividendsContract.methods.claimDividends().send({
       from: this.HXYTokenContract.givenProvider.selectedAddress
+    }).then((res) => {
+      return this.checkTransaction(res);
     });
   }
 
@@ -404,19 +443,25 @@ export class Contract {
     const promises = [
       this.DividendsContract.methods.getTodayDividendsTotal().call().then((ret) => {
         return {
-          key: 'today',
+          key: 'todayDividendsTotal',
           val: ret
         };
       }),
-      this.DividendsContract.methods.getAvailableDividendsTotal().call().then((ret) => {
+      this.DividendsContract.methods.getPreviousDividendsTotal().call().then((ret) => {
         return {
-          key: 'availableTotal',
+          key: 'previousDividendsTotal',
+          val: ret
+        };
+      }),
+      this.DividendsContract.methods.getBeforePreviousDividendsTotal().call().then((ret) => {
+        return {
+          key: 'beforePreviousDividendsTotal',
           val: ret
         };
       }),
       this.DividendsContract.methods.getClaimedDividendsTotal().call().then((ret) => {
         return {
-          key: 'claimedTotal',
+          key: 'claimedDividendsTotal',
           val: ret
         };
       })

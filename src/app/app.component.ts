@@ -85,8 +85,6 @@ export class AppComponent {
 
   private claimChecker: any;
 
-  public notClaimedState: boolean;
-
   constructor(
     private web3Service: MetamaskService,
     private ngZone: NgZone
@@ -139,14 +137,11 @@ export class AppComponent {
   private getUserDividends() {
     return this.contract.getAvailableDividends().then((dividends) => {
       if (dividends === null) {
-        this.notClaimedState = true;
         return;
       }
-      this.notClaimedState = false;
       this.dividends = this.dividends || [];
       dividends.forEach((div) => {
         div.value = new BigNumber(div.value);
-
         const oldDiv =  this.dividends.find((old) => {
           return div.coin === old.coin;
         });
@@ -226,6 +221,7 @@ export class AppComponent {
         this.getDividends();
         this.updateUserFreezings();
         this.updateRoundInfo();
+        this.updateDynamicInfo();
       });
     }
   }
@@ -271,9 +267,9 @@ export class AppComponent {
 
   private getDividends() {
     this.contract.getDividendsState().then((res: any) => {
-      res.availableTotal.forEach((val, index) => {
+      res.previousDividendsTotal.forEach((val, index) => {
         let profit = 0;
-        const claimed = res.claimedTotal[index].value;
+        const claimed = res.beforePreviousDividendsTotal[index].value;
         if (claimed) {
           const onePercent = claimed / 100;
           profit = val.value / onePercent - 100;
@@ -330,7 +326,7 @@ export class AppComponent {
     transactionPromise.then(() => {
       this.updateDynamicInfo();
       this.getAccountBalances();
-      this.formData.send.amount = '0';
+      this.formData.send.amount = '';
     }).finally(() => {
       this.form1Progress = false;
     });
@@ -357,9 +353,6 @@ export class AppComponent {
       this.updateUserFreezings().then(() => {
         this.updateDynamicInfo();
         this.getAccountBalances();
-        this.freezings = this.freezings.filter((exFreeze) => {
-          return exFreeze.id !== freezing.id;
-        });
       });
     }).catch(() => {
       freezing.inProgress = false;
@@ -372,6 +365,7 @@ export class AppComponent {
     this.contract.refreezeHxy(freezing.startDate).then(() => {
       this.updateUserFreezings().then(() => {
         this.updateDynamicInfo();
+        this.getAccountBalances();
         const currentFreeze = this.freezings.find((fr) => {
           return freezing.id === fr.id;
         });
@@ -387,18 +381,41 @@ export class AppComponent {
 
   public claimDividends() {
     this.form3Progress = true;
-    this.contract.claimDividends().then(() => {
-      this.updateDynamicInfo();
-      this.getUserDividends().then(() => {
-        this.expiredIn.latest = Math.round((new Date().getTime()) / 1000);
-        this.form3Progress = false;
-        this.getDividends();
+
+    const callClaim = () => {
+      this.contract.claimDividends().then(() => {
+        this.updateDynamicInfo();
+        this.getAccountBalances();
+        this.getUserDividends().then(() => {
+          if (this.expiredIn.requireRequest) {
+            this.updateRemainingTime().then(() => {
+              this.getUserDividends();
+              this.expiredIn.latest = Math.round((new Date().getTime()) / 1000);
+              this.form3Progress = false;
+            });
+          } else {
+            this.expiredIn.latest = Math.round((new Date().getTime()) / 1000);
+            this.form3Progress = false;
+          }
+          this.getDividends();
+        }).catch(() => {
+          this.form3Progress = false;
+        });
       }).catch(() => {
         this.form3Progress = false;
       });
-    }).catch(() => {
-      this.form3Progress = false;
-    });
+    };
+
+    if (this.expiredIn.requireRequest) {
+      this.updateRemainingTime().then(() => {
+        if (!this.expiredIn.requireRequest) {
+          this.getUserDividends();
+        }
+        callClaim();
+      });
+    } else {
+      callClaim();
+    }
   }
 
 
