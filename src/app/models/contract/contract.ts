@@ -3,8 +3,7 @@ import {ContractConstants} from './constants';
 import BigNumber from 'bignumber.js';
 // import BigNumber from 'bignumber.js';
 
-// const oneDaySeconds = 86400;
-const oneDaySeconds = 300;
+
 const dividendsKeys = ['ETH', 'HXY', 'HEX', 'USDC'];
 
 export class Contract {
@@ -305,9 +304,9 @@ export class Contract {
     return this.DividendsContract.methods.getRecordTime().call().then((r: any) => {
       r = +r;
       const now = Math.round(new Date().getTime() / 1000);
-      let leftSeconds = r % oneDaySeconds - now % oneDaySeconds;
+      let leftSeconds = r % ContractConstants[this.network].SECONDS_OF_DAY - now % ContractConstants[this.network].SECONDS_OF_DAY;
       if (leftSeconds < 0) {
-        leftSeconds += oneDaySeconds;
+        leftSeconds += ContractConstants[this.network].SECONDS_OF_DAY;
       }
 
       return this.DividendsContract.methods.getUserLastClaim(
@@ -317,7 +316,7 @@ export class Contract {
           left: leftSeconds,
           latest: +lastClaim,
           next: now + leftSeconds,
-          period: oneDaySeconds,
+          period: ContractConstants[this.network].SECONDS_OF_DAY,
           requireRequest: now > r
         };
       });
@@ -392,7 +391,12 @@ export class Contract {
         const allFreezingsPromises = res.map((freezId) => {
           return this.HXYTokenContract.methods.getFreezingById(freezId).call().then((freezing: any) => {
             freezing.id = freezId;
-            freezing.endDateTime = (+freezing.startDate + freezing.freezeDays * oneDaySeconds) * 1000 + timeRange;
+            freezing.endDateTime =
+              (+freezing.startDate + freezing.freezeDays * ContractConstants[this.network].SECONDS_OF_DAY) * 1000 + timeRange;
+
+            freezing.forCapEndDateTime = freezing.capitalized ?
+              (+freezing.startDate + ContractConstants[this.network].SECONDS_OF_DAY) * 1000 + timeRange : freezing.endDateTime;
+
             return this.HXYTokenContract.methods.getCurrentInterestAmount(account, freezing.startDate).call().then((interest) => {
               freezing.interest = interest;
               return freezing;
@@ -400,6 +404,7 @@ export class Contract {
           });
         });
         return Promise.all(allFreezingsPromises).then((freezings) => {
+          console.log(freezings);
           return freezings.filter((freezing: any) => {
             return +freezing.freezeAmount > 0;
           }).sort((a: any, b: any) => {

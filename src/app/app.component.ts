@@ -137,20 +137,31 @@ export class AppComponent {
   private getUserDividends() {
     return this.contract.getAvailableDividends().then((dividends) => {
       if (dividends === null) {
+        this.dividends = null;
         return;
       }
-      this.dividends = this.dividends || [];
-      dividends.forEach((div) => {
-        div.value = new BigNumber(div.value);
-        const oldDiv =  this.dividends.find((old) => {
-          return div.coin === old.coin;
-        });
-        if (oldDiv) {
-          oldDiv.value = div.value;
-        } else {
-          this.dividends.push(div);
-        }
+
+      const notZero = dividends.find((d) => {
+        return +d.value > 0;
       });
+
+      if (notZero) {
+        this.dividends = this.dividends || [];
+        dividends.forEach((div) => {
+          div.value = new BigNumber(div.value);
+          const oldDiv =  this.dividends.find((old) => {
+            return div.coin === old.coin;
+          });
+          if (oldDiv) {
+            oldDiv.value = div.value;
+          } else {
+            this.dividends.push(div);
+          }
+        });
+      } else {
+        this.dividends = null;
+      }
+
     });
   }
 

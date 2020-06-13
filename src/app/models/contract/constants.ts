@@ -1,17 +1,33 @@
 export const ContractConstants = {
+  kovan: {
+    SECONDS_OF_DAY: 300
+  },
+  mainnet: {
+    SECONDS_OF_DAY: 86400
+  },
   ADDRESSES: {
     kovan: {
       HEX: '0x19C165F2093f2CF5F26b9b2F3393271f63c745DF',
-      HXY: '0x369C942c692ddB20E116D0BCf3dE52009Cb48D2E',
+      HXY: '0xad313adC99284E7F0E7a9D920aA1DA662c23764d',
       USDC: '0x05F0a875C881D90D3cC7464c9d914678572FDa1A',
-      ETH_EXCHANGE: '0x7266EB2D7a74aDf9b189A69d5fF05450C88e60aA',
-      HEX_EXCHANGE: '0x6b57b218D8E2D211Ffb6128696Ad9b1cB56b20f9',
-      USDC_EXCHANGE: '0x9eF2145c5b6D5EDF86779a38c57892eb9096bdA3',
-      DIVIDENDS: '0xc16BE82301bb417B9C888503fcd04Adb7749F8f2',
+      ETH_EXCHANGE: '0x117ED49E450EC7D3ac3fA32Cd6684a93D5BCeA45',
+      HEX_EXCHANGE: '0x2f56Cd930F9b944e1830d6ed4F31a764Ab6686d4',
+      USDC_EXCHANGE: '0x3C6853B4c9854e50A5092E999766bF740937e62D',
+      DIVIDENDS: '0x526CFeA9B86425b8094e8f4150966494b090F9A6',
       UNISWAP: '0x5C40C8b461f43Ac559c5A335f93908FAe6f62Ab2',
       UNISWAP_USDC: '0xFcA3e24A438D3029E3f5e57489DA4fb05A9D7600'
     },
-    mainnet: {}
+    mainnet: {
+      HEX: '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39',
+      HXY: '0x673CA2D1cAC9492c0Db256CD9F92267AC3D69aF9',
+      USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
+      ETH_EXCHANGE: '0x5C40C8b461f43Ac559c5A335f93908FAe6f62Ab2',
+      HEX_EXCHANGE: '0x7855B1cF117801F9494eA42CCE9b193A6815AD7b',
+      USDC_EXCHANGE: '0xD9dDFC102b0E31931D5A4d816EcaedAC3291A1a0',
+      DIVIDENDS: '0x6b57b218D8E2D211Ffb6128696Ad9b1cB56b20f9',
+      UNISWAP: '0xF8A6fD6E8127Cd24b31c29d3CA413Edc98a96b14',
+      UNISWAP_USDC: '0x39359Cad8339Adf177C057FecC08F8Ac32e70F04'
+    }
   },
   ABIs: {
     UNISWAP: [
@@ -37,7 +53,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -56,7 +73,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -75,7 +93,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -94,7 +113,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -113,7 +133,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       }
     ],
     UNISWAP_USDC: [
@@ -139,7 +160,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -158,7 +180,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -177,7 +200,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -196,7 +220,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -215,44 +240,202 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       }
     ],
     HEX: [
       {
+        constant: true,
+        inputs: [],
+        name: 'name',
+        outputs: [
+          {
+            name: '',
+            type: 'string'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
         inputs: [
           {
-            internalType: 'address',
-            name: 'account',
+            name: '_spender',
             type: 'address'
           },
           {
-            internalType: 'uint256',
-            name: 'initialSupply',
+            name: '_value',
             type: 'uint256'
           }
         ],
+        name: 'approve',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
         stateMutability: 'nonpayable',
-        type: 'constructor'
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'totalSupply',
+        outputs: [
+          {
+            name: '',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: '_from',
+            type: 'address'
+          },
+          {
+            name: '_to',
+            type: 'address'
+          },
+          {
+            name: '_value',
+            type: 'uint256'
+          }
+        ],
+        name: 'transferFrom',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'decimals',
+        outputs: [
+          {
+            name: '',
+            type: 'uint8'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: '_owner',
+            type: 'address'
+          }
+        ],
+        name: 'balanceOf',
+        outputs: [
+          {
+            name: 'balance',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'symbol',
+        outputs: [
+          {
+            name: '',
+            type: 'string'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: '_to',
+            type: 'address'
+          },
+          {
+            name: '_value',
+            type: 'uint256'
+          }
+        ],
+        name: 'transfer',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: '_owner',
+            type: 'address'
+          },
+          {
+            name: '_spender',
+            type: 'address'
+          }
+        ],
+        name: 'allowance',
+        outputs: [
+          {
+            name: '',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        payable: true,
+        stateMutability: 'payable',
+        type: 'fallback'
       },
       {
         anonymous: false,
         inputs: [
           {
             indexed: true,
-            internalType: 'address',
             name: 'owner',
             type: 'address'
           },
           {
             indexed: true,
-            internalType: 'address',
             name: 'spender',
             type: 'address'
           },
           {
             indexed: false,
-            internalType: 'uint256',
             name: 'value',
             type: 'uint256'
           }
@@ -265,300 +448,216 @@ export const ContractConstants = {
         inputs: [
           {
             indexed: true,
-            internalType: 'address',
             name: 'from',
             type: 'address'
           },
           {
             indexed: true,
-            internalType: 'address',
             name: 'to',
             type: 'address'
           },
           {
             indexed: false,
-            internalType: 'uint256',
             name: 'value',
             type: 'uint256'
           }
         ],
         name: 'Transfer',
         type: 'event'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'owner',
-            type: 'address'
-          },
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          }
-        ],
-        name: 'allowance',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'approve',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'account',
-            type: 'address'
-          }
-        ],
-        name: 'balanceOf',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'decimals',
-        outputs: [
-          {
-            internalType: 'uint8',
-            name: '',
-            type: 'uint8'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'subtractedValue',
-            type: 'uint256'
-          }
-        ],
-        name: 'decreaseAllowance',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'addedValue',
-            type: 'uint256'
-          }
-        ],
-        name: 'increaseAllowance',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'name',
-        outputs: [
-          {
-            internalType: 'string',
-            name: '',
-            type: 'string'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'symbol',
-        outputs: [
-          {
-            internalType: 'string',
-            name: '',
-            type: 'string'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'totalSupply',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'recipient',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'transfer',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'sender',
-            type: 'address'
-          },
-          {
-            internalType: 'address',
-            name: 'recipient',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'transferFrom',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'account',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'mint',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
       }
     ],
     USDC: [
       {
+        constant: true,
+        inputs: [],
+        name: 'name',
+        outputs: [
+          {
+            name: '',
+            type: 'string'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
         inputs: [
           {
-            internalType: 'address',
-            name: 'account',
+            name: '_spender',
             type: 'address'
           },
           {
-            internalType: 'uint256',
-            name: 'initialSupply',
+            name: '_value',
             type: 'uint256'
           }
         ],
+        name: 'approve',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
         stateMutability: 'nonpayable',
-        type: 'constructor'
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'totalSupply',
+        outputs: [
+          {
+            name: '',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: '_from',
+            type: 'address'
+          },
+          {
+            name: '_to',
+            type: 'address'
+          },
+          {
+            name: '_value',
+            type: 'uint256'
+          }
+        ],
+        name: 'transferFrom',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'decimals',
+        outputs: [
+          {
+            name: '',
+            type: 'uint8'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: '_owner',
+            type: 'address'
+          }
+        ],
+        name: 'balanceOf',
+        outputs: [
+          {
+            name: 'balance',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [],
+        name: 'symbol',
+        outputs: [
+          {
+            name: '',
+            type: 'string'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: '_to',
+            type: 'address'
+          },
+          {
+            name: '_value',
+            type: 'uint256'
+          }
+        ],
+        name: 'transfer',
+        outputs: [
+          {
+            name: '',
+            type: 'bool'
+          }
+        ],
+        payable: false,
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: '_owner',
+            type: 'address'
+          },
+          {
+            name: '_spender',
+            type: 'address'
+          }
+        ],
+        name: 'allowance',
+        outputs: [
+          {
+            name: '',
+            type: 'uint256'
+          }
+        ],
+        payable: false,
+        stateMutability: 'view',
+        type: 'function'
+      },
+      {
+        payable: true,
+        stateMutability: 'payable',
+        type: 'fallback'
       },
       {
         anonymous: false,
         inputs: [
           {
             indexed: true,
-            internalType: 'address',
             name: 'owner',
             type: 'address'
           },
           {
             indexed: true,
-            internalType: 'address',
             name: 'spender',
             type: 'address'
           },
           {
             indexed: false,
-            internalType: 'uint256',
             name: 'value',
             type: 'uint256'
           }
@@ -571,271 +670,30 @@ export const ContractConstants = {
         inputs: [
           {
             indexed: true,
-            internalType: 'address',
             name: 'from',
             type: 'address'
           },
           {
             indexed: true,
-            internalType: 'address',
             name: 'to',
             type: 'address'
           },
           {
             indexed: false,
-            internalType: 'uint256',
             name: 'value',
             type: 'uint256'
           }
         ],
         name: 'Transfer',
         type: 'event'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'owner',
-            type: 'address'
-          },
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          }
-        ],
-        name: 'allowance',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'approve',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'account',
-            type: 'address'
-          }
-        ],
-        name: 'balanceOf',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'decimals',
-        outputs: [
-          {
-            internalType: 'uint8',
-            name: '',
-            type: 'uint8'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'subtractedValue',
-            type: 'uint256'
-          }
-        ],
-        name: 'decreaseAllowance',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'addedValue',
-            type: 'uint256'
-          }
-        ],
-        name: 'increaseAllowance',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'name',
-        outputs: [
-          {
-            internalType: 'string',
-            name: '',
-            type: 'string'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'symbol',
-        outputs: [
-          {
-            internalType: 'string',
-            name: '',
-            type: 'string'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'totalSupply',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'recipient',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'transfer',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'sender',
-            type: 'address'
-          },
-          {
-            internalType: 'address',
-            name: 'recipient',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'transferFrom',
-        outputs: [
-          {
-            internalType: 'bool',
-            name: '',
-            type: 'bool'
-          }
-        ],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'account',
-            type: 'address'
-          },
-          {
-            internalType: 'uint256',
-            name: 'amount',
-            type: 'uint256'
-          }
-        ],
-        name: 'mint',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
       }
     ],
     HXY: [
       {
         inputs: [
           {
-            internalType: 'address payable',
-            name: '_teamAddress',
+            internalType: 'address',
+            name: '_whitelistAddress',
             type: 'address'
           },
           {
@@ -846,11 +704,6 @@ export const ContractConstants = {
           {
             internalType: 'address',
             name: '_lockSupAddress',
-            type: 'address'
-          },
-          {
-            internalType: 'address',
-            name: '_migratedSupplyAddress',
             type: 'address'
           }
         ],
@@ -1012,8 +865,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1026,8 +878,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1040,8 +891,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1054,8 +904,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1074,8 +923,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1099,8 +947,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1143,8 +990,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1157,8 +1003,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1171,8 +1016,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1215,8 +1059,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1247,11 +1090,15 @@ export const ContractConstants = {
             internalType: 'uint256',
             name: 'freezeAmount',
             type: 'uint256'
+          },
+          {
+            internalType: 'bool',
+            name: 'capitalized',
+            type: 'bool'
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1270,8 +1117,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1295,8 +1141,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1315,8 +1160,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1329,8 +1173,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1349,8 +1192,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1363,8 +1205,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1406,8 +1247,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1450,8 +1290,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1464,8 +1303,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1504,19 +1342,6 @@ export const ContractConstants = {
         type: 'function'
       },
       {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newWhitelistAddress',
-            type: 'address'
-          }
-        ],
-        name: 'setWhitelistAddress',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
         inputs: [],
         name: 'symbol',
         outputs: [
@@ -1527,8 +1352,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1541,8 +1365,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1608,8 +1431,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1622,8 +1444,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1636,8 +1457,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1650,8 +1470,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1664,8 +1483,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1678,8 +1496,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1692,8 +1509,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1706,8 +1522,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1720,8 +1535,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1734,8 +1548,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1748,8 +1561,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1762,8 +1574,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1787,8 +1598,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1803,7 +1613,7 @@ export const ContractConstants = {
             type: 'uint256'
           }
         ],
-        name: 'mintFromDapp',
+        name: 'mintFromExchange',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -1821,7 +1631,7 @@ export const ContractConstants = {
             type: 'uint256'
           }
         ],
-        name: 'mintFromReferral',
+        name: 'mintFromDappOrReferral',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -1873,7 +1683,13 @@ export const ContractConstants = {
         type: 'function'
       },
       {
-        inputs: [],
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: '_startDate',
+            type: 'uint256'
+          }
+        ],
         name: 'releaseLockedSupply',
         outputs: [],
         stateMutability: 'nonpayable',
@@ -1896,8 +1712,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1916,8 +1731,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       }
     ],
     ETH_EXCHANGE: [
@@ -1931,6 +1745,11 @@ export const ContractConstants = {
           {
             internalType: 'address payable',
             name: '_dividendsContract',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_uniswapEth',
             type: 'address'
           }
         ],
@@ -1998,7 +1817,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2011,7 +1831,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2024,7 +1845,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2037,7 +1859,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2050,7 +1873,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2063,7 +1887,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2082,7 +1907,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2106,7 +1932,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2125,7 +1952,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2138,7 +1966,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2180,7 +2009,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2271,21 +2101,9 @@ export const ContractConstants = {
         type: 'function'
       },
       {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newWhitelistAddress',
-            type: 'address'
-          }
-        ],
-        name: 'setWhitelistAddress',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
         stateMutability: 'payable',
-        type: 'receive'
+        type: 'receive',
+        payable: true
       },
       {
         inputs: [],
@@ -2298,7 +2116,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2330,27 +2149,29 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
         name: 'exchangeEth',
         outputs: [],
         stateMutability: 'payable',
-        type: 'function'
+        type: 'function',
+        payable: true
       }
     ],
     HEX_EXCHANGE: [
       {
         inputs: [
           {
-            internalType: 'contract IERC20',
-            name: '_hexToken',
+            internalType: 'contract HXY',
+            name: '_hxyToken',
             type: 'address'
           },
           {
-            internalType: 'contract HXY',
-            name: '_hxyToken',
+            internalType: 'contract IERC20',
+            name: '_hexToken',
             type: 'address'
           },
           {
@@ -2423,7 +2244,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2436,7 +2258,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2449,7 +2272,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2462,7 +2286,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2475,7 +2300,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2488,7 +2314,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2507,7 +2334,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2531,7 +2359,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2550,7 +2379,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -2563,7 +2393,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2605,7 +2436,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2696,19 +2528,6 @@ export const ContractConstants = {
         type: 'function'
       },
       {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newWhitelistAddress',
-            type: 'address'
-          }
-        ],
-        name: 'setWhitelistAddress',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
         inputs: [],
         name: 'getHexTokenAddress',
         outputs: [
@@ -2719,7 +2538,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -2752,18 +2572,28 @@ export const ContractConstants = {
       {
         inputs: [
           {
-            internalType: 'contract IERC20',
-            name: '_usdcToken',
-            type: 'address'
-          },
-          {
             internalType: 'contract HXY',
             name: '_hxyToken',
             type: 'address'
           },
           {
+            internalType: 'contract IERC20',
+            name: '_usdcToken',
+            type: 'address'
+          },
+          {
             internalType: 'address payable',
             name: '_dividendsContract',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_uniswapEth',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_uniswapUsdc',
             type: 'address'
           }
         ],
@@ -3110,19 +2940,6 @@ export const ContractConstants = {
           }
         ],
         name: 'setMinAmount',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newWhitelistAddress',
-            type: 'address'
-          }
-        ],
-        name: 'setWhitelistAddress',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -3274,11 +3091,6 @@ export const ContractConstants = {
             internalType: 'address payable',
             name: '_thirdTeamAddress',
             type: 'address'
-          },
-          {
-            internalType: 'address payable',
-            name: '_fourthTeamAddress',
-            type: 'address'
           }
         ],
         stateMutability: 'nonpayable',
@@ -3516,19 +3328,6 @@ export const ContractConstants = {
           }
         ],
         name: 'revokeRole',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newWhitelistAddress',
-            type: 'address'
-          }
-        ],
-        name: 'setWhitelistAddress',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -3768,58 +3567,6 @@ export const ContractConstants = {
       {
         inputs: [],
         name: 'claimDividends',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHexToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHexToken',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHxyToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHxyToken',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'uint256',
-            name: 'newPercentage',
-            type: 'uint256'
-          }
-        ],
-        name: 'setDividendsPercent',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'uint256',
-            name: 'recordTime',
-            type: 'uint256'
-          }
-        ],
-        name: 'setInitialRecordTime',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'

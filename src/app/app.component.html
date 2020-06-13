@@ -131,98 +131,106 @@
   </form>
 
 
-  <form class="calculate-controls calculate-controls__2 with-bottom-label left-align"
+  <form class="calculate-controls calculate-controls__2 with-bottom-label no-flex"
         *ngIf="coinsDecimals && balances"
-        #wantForm="ngForm" name="want-form" [ngClass]="{disabled: form2Progress || HXYBalance == 0}">
-    <div class="calculate-controls_element calculate-controls_label">
-      Freeze
+        #wantForm="ngForm" name="want-form" [ngClass]="{disabled: form2Progress}">
+
+    <div class="warning-message">
+      Please Claim daily dividends (if any) before any action with freezing (Freeze, Unfreeze, Capitalize).<br/>
+      After any action you will not be able to get dividends today.
     </div>
 
-    <div class="calculate-controls_element calculate-controls_textfield calculate-controls_label calculate-controls_label__bottom">
-      <input type="text" class="calculate-controls_input" name="amount"
-             placeholder="Enter amount"
-             required="true"
-             [appBigNumber]="{
-                decimals: coinsDecimals['HXY'],
-                min: 1,
-                max: HXYBalance
-             }"
-             [(ngModel)]="formData.want.amount">HXY
-      <small (click)="formData.want.amount = toDecimals(HXYBalance, coinsDecimals['HXY'])" class="as-link">
-        Available: {{HXYBalance | bigNumberFormat : coinsDecimals['HXY'] : true}} HXY
-      </small>
-    </div>
+    <div class="flex-block left-align">
+      <div class="calculate-controls_element calculate-controls_label">
+        Freeze
+      </div>
 
-    <div class="calculate-controls_element calculate-controls_btn">&nbsp;&nbsp;&nbsp;
-      <button type="submit" class="calculate-controls_button"
-              [ngClass]="{'in-progress': form2Progress}"
-              [disabled]="!wantForm.valid || form2Progress"
-              (click)="freezeHXY()">
-        <span class="lds-ellipsis" *ngIf="form2Progress">
-          <span class="lds-ellipsis-container">
-            <span></span><span></span><span></span><span></span>
+      <div class="calculate-controls_element calculate-controls_textfield calculate-controls_label calculate-controls_label__bottom">
+        <input type="text" class="calculate-controls_input" name="amount"
+               placeholder="Enter amount"
+               required="true"
+               [appBigNumber]="{
+                  decimals: coinsDecimals['HXY'],
+                  min: 1,
+                  max: HXYBalance
+               }"
+               [(ngModel)]="formData.want.amount">HXY
+        <small (click)="formData.want.amount = toDecimals(HXYBalance, coinsDecimals['HXY'])" class="as-link">
+          Available: {{HXYBalance | bigNumberFormat : coinsDecimals['HXY'] : true}} HXY
+        </small>
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_btn">&nbsp;&nbsp;&nbsp;
+        <button type="submit" class="calculate-controls_button"
+                [ngClass]="{'in-progress': form2Progress}"
+                [disabled]="!wantForm.valid || form2Progress"
+                (click)="freezeHXY()">
+          <span class="lds-ellipsis" *ngIf="form2Progress">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
+            </span>
           </span>
-        </span>
-        <span>Freeze</span>
-      </button>
+          <span>Freeze</span>
+        </button>
+      </div>
     </div>
   </form>
 
   <div class="calculate-controls calculate-controls__4" *ngIf="coinsDecimals && freezings && freezings.length">
     <table cellpadding="0" cellspacing="0" border="0" width="100%" class="interest-table">
-      <thead>
-      <tr>
-        <th>Frozen</th>
-        <th>Amount</th>
-        <th>Interest</th>
-        <th>&nbsp;</th>
-        <th>
-          Status
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let freezing of freezings">
-        <td></td>
-        <td>
-          {{freezing.freezeAmount | bigNumberFormat : coinsDecimals.HXY : true }} HXY
-        </td>
-        <td>
-          {{freezing.interest | bigNumberFormat : coinsDecimals.HXY : true }} HXY
-        </td>
-        <td>
-          <button type="submit" class="calculate-controls_button"
-                  *ngIf="freezing.endDateTime <= now"
-                  [ngClass]="{'in-progress': freezing.inProgressRefreeze}"
-                  [disabled]="freezing.inProgressRefreeze || freezing.inProgress"
-                  (click)="refreezeHxy(freezing)">
-            <span class="lds-ellipsis" *ngIf="freezing.inProgressRefreeze">
-              <span class="lds-ellipsis-container">
-                <span></span><span></span><span></span><span></span>
-              </span>
+    <thead>
+    <tr>
+      <th>Frozen</th>
+      <th>Amount</th>
+      <th>Interest</th>
+      <th>&nbsp;</th>
+      <th>
+        Status
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let freezing of freezings">
+      <td></td>
+      <td>
+        {{freezing.freezeAmount | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY
+      </td>
+      <td>
+        {{freezing.interest | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY
+      </td>
+      <td>
+        <button type="submit" class="calculate-controls_button"
+                *ngIf="freezing.forCapEndDateTime <= now"
+                [ngClass]="{'in-progress': freezing.inProgressRefreeze}"
+                [disabled]="freezing.inProgressRefreeze || freezing.inProgress"
+                (click)="refreezeHxy(freezing)">
+          <span class="lds-ellipsis" *ngIf="freezing.inProgressRefreeze">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
             </span>
-            <span>Capitalize</span>
-          </button>
-        </td>
-        <td class="unfreeze-cell" *ngIf="freezing.endDateTime > now">
-          <span>{{freezing.endDateTime | date : 'yyyy.MM.dd HH:mm'}}</span>
-        </td>
-        <td *ngIf="freezing.endDateTime <= now">
-          <button type="submit" class="calculate-controls_button"
-                  [ngClass]="{'in-progress': freezing.inProgress}"
-                  [disabled]="freezing.inProgressRefreeze || freezing.inProgress"
-                  (click)="unFreeze(freezing)">
-            <span class="lds-ellipsis" *ngIf="freezing.inProgress">
-              <span class="lds-ellipsis-container">
-                <span></span><span></span><span></span><span></span>
-              </span>
+          </span>
+          <span>Capitalize</span>
+        </button>
+      </td>
+      <td class="unfreeze-cell" *ngIf="freezing.endDateTime > now">
+        <span>{{freezing.endDateTime | date : 'yyyy.MM.dd HH:mm'}}</span>
+      </td>
+      <td *ngIf="freezing.endDateTime <= now">
+        <button type="submit" class="calculate-controls_button"
+                [ngClass]="{'in-progress': freezing.inProgress}"
+                [disabled]="freezing.inProgressRefreeze || freezing.inProgress"
+                (click)="unFreeze(freezing)">
+          <span class="lds-ellipsis" *ngIf="freezing.inProgress">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
             </span>
-            <span>Unfreeze</span>
-          </button>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+          </span>
+          <span>Unfreeze</span>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+</table>
   </div>
 
   <div class="calculate-controls calculate-controls__3 no-flex"
@@ -232,17 +240,29 @@
     </div>
     <div class="flex-block left-align">
 
-      <div class="calculate-controls_element calculate-controls_label" *ngIf="expiredIn?.requireRequest">
+      <div class="calculate-controls_element calculate-controls_label"
+           *ngIf="expiredIn?.requireRequest">
         <small>Dividends will be calculated after the first Claim</small>
       </div>
 
+      <div class="calculate-controls_element calculate-controls_label"
+           *ngIf="!expiredIn?.requireRequest && isActiveClaim">
+        <small>Your daily dividends were paid</small>
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_label"
+           *ngIf="!expiredIn?.requireRequest && !isActiveClaim && ((freezings && !freezings.length) || (dividends === null))">
+        <small>No dividends for today</small>
+      </div>
+
+
       <div class="calculate-controls_element calculate-controls_label no-padding"
-           *ngIf="dividends && coinsDecimals && !expiredIn?.requireRequest">
+           *ngIf="dividends && coinsDecimals && !expiredIn?.requireRequest && !isActiveClaim && !(freezings && !freezings.length)">
         <div class="divided-coins">
           <span *ngFor="let dividend of dividends;" class="divided-coins_item">
             <img class="divided-coins_item_icon" [src]="coinsIcons[dividend.coin]">
             <span class="divided-coins_item_value">
-              {{ dividend.value | bigNumberFormat : coinsDecimals[dividend.coin] : true }}
+              {{ dividend.value | bigNumberFormat : coinsDecimals[dividend.coin] : true : false : 4 }}
               {{dividend.coin}}
             </span>
           </span>
@@ -252,7 +272,7 @@
       <div class="calculate-controls_element calculate-controls_btn" *ngIf="expiredIn">
         <button type="submit" class="calculate-controls_button"
                 [ngClass]="{'in-progress': form3Progress}"
-                [disabled]="form3Progress || isActiveClaim"
+                [disabled]="form3Progress || isActiveClaim || (freezings && !freezings.length)"
                 (click)="claimDividends()">
         <span class="lds-ellipsis" *ngIf="form3Progress">
           <span class="lds-ellipsis-container">
@@ -275,14 +295,14 @@
     <thead>
     <tr>
       <th>Dividends</th>
-      <th *ngFor="let coinVal of dividendsState.today">{{coinVal.coin}}</th>
+      <th *ngFor="let coinVal of dividendsState.todayDividendsTotal">{{coinVal.coin}}</th>
     </tr>
     </thead>
     <tbody>
     <tr>
       <td class="dividends-info-table_title-row">Collected now</td>
       <td class="dividends-info-table_val" *ngFor="let coinVal of dividendsState.todayDividendsTotal">
-        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
+        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true : false : 4 }}
       </td>
     </tr>
     <tr>
@@ -293,22 +313,22 @@
             'dividends-info-table_val__down': coinVal.profit < 0
           }"
           *ngFor="let coinVal of dividendsState.previousDividendsTotal">
-        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
-        <span class="dividends-info-table_val__percent">{{coinVal.profit}}%</span>
+        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true : false : 4 }}
+        <span class="dividends-info-table_val__percent">{{coinVal.profit | number : '.0-2'}}%</span>
       </td>
     </tr>
-    <tr>
+    <!-- tr>
       <td class="dividends-info-table_title-row">С чем сравниваю</td>
       <td class="dividends-info-table_val"
           *ngFor="let coinVal of dividendsState.beforePreviousDividendsTotal">
-        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
+        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true : false : 4 }}
       </td>
-    </tr>
+    </tr -->
     <tr>
       <td class="dividends-info-table_title-row">Distributed Yesterday</td>
       <td class="dividends-info-table_val"
           *ngFor="let coinVal of dividendsState.claimedDividendsTotal">
-        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true }}
+        {{ coinVal.value | bigNumberFormat : coinsDecimals[coinVal.coin] : true : false : 4 }}
       </td>
     </tr>
     </tbody>
@@ -321,15 +341,15 @@
       <tbody>
       <tr>
         <td class="dividends-info-table_title-row">Max supply</td>
-        <td class="dividends-info-table_val">{{ totalInfo.maxSupply | bigNumberFormat : coinsDecimals.HXY : true }} HXY</td>
+        <td class="dividends-info-table_val">{{ totalInfo.maxSupply | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY</td>
       </tr>
       <tr>
         <td class="dividends-info-table_title-row">Locked</td>
-        <td class="dividends-info-table_val">{{ totalInfo.locked | bigNumberFormat : coinsDecimals.HXY : true }} HXY</td>
+        <td class="dividends-info-table_val">{{ totalInfo.locked | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY</td>
       </tr>
       <tr>
         <td class="dividends-info-table_title-row">Total supply</td>
-        <td class="dividends-info-table_val">{{ totalInfo.totalSupply | bigNumberFormat : coinsDecimals.HXY : true }} HXY</td>
+        <td class="dividends-info-table_val">{{ totalInfo.totalSupply | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY</td>
       </tr>
       </tbody>
     </table>
@@ -338,11 +358,11 @@
       <tbody>
       <tr>
         <td class="dividends-info-table_title-row">Frozen</td>
-        <td class="dividends-info-table_val">{{ totalInfo.frozen | bigNumberFormat : coinsDecimals.HXY : true }} HXY</td>
+        <td class="dividends-info-table_val">{{ totalInfo.frozen | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY</td>
       </tr>
       <tr>
         <td class="dividends-info-table_title-row">Circulating</td>
-        <td class="dividends-info-table_val">{{ totalInfo.circulating | bigNumberFormat : coinsDecimals.HXY : true }} HXY</td>
+        <td class="dividends-info-table_val">{{ totalInfo.circulating | bigNumberFormat : coinsDecimals.HXY : true : false : 4 }} HXY</td>
       </tr>
       </tbody>
     </table>
