@@ -1,7 +1,6 @@
 import {MetamaskService} from '../../services/web3/web3.service';
 import {ContractConstants} from './constants';
 import BigNumber from 'bignumber.js';
-// import BigNumber from 'bignumber.js';
 
 
 const dividendsKeys = ['ETH', 'HXY', 'HEX', 'USDC'];
@@ -225,38 +224,82 @@ export class Contract {
     });
   }
 
-  public sendHEX(amount) {
-    const fromAccount = this.HEXTokenContract.givenProvider.selectedAddress;
-    return new Promise((resolve, reject) => {
-      this.HEXTokenContract.methods.approve(this.HEXExchangeContract.options.address, amount).send({
-        from: fromAccount
-      }).then(() => {
-        this.HEXExchangeContract.methods.exchangeHex(amount).send({
-          from: fromAccount
-        }).then((res) => {
-          return this.checkTransaction(res);
-        }).then(resolve, reject);
-      }, reject);
-    });
-  }
 
-
-  public sendUSDC(amount) {
-    const fromAccount = this.USDCTokenContract.givenProvider.selectedAddress;
+  private checkHEXApproval(amount): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.USDCTokenContract.methods.approve(this.USDCExchangeContract.options.address, amount).send({
-        from: fromAccount
-      }).then(() => {
-        this.USDCExchangeContract.methods.exchangeUsdc(amount).send({
-          from: fromAccount
-        }).then((res) => {
-          return this.checkTransaction(res);
-        }).then(resolve, reject);
-      }, reject).catch((err) => {
-        console.log(err);
+      this.HEXTokenContract.methods.allowance(
+        this.HEXTokenContract.givenProvider.selectedAddress,
+        this.HEXExchangeContract.options.address
+      ).call().then((allowance: string) => {
+        const allow = new BigNumber(allowance);
+        const allowed = allow.minus(amount);
+        allowed.isNegative() ? reject() : resolve();
       });
     });
   }
+
+  public sendHEX(amount) {
+    const fromAccount = this.HEXTokenContract.givenProvider.selectedAddress;
+
+    const exchangeTokens = () => {
+      return this.HEXExchangeContract.methods.exchangeHex(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return new Promise((resolve, reject) => {
+      this.checkHEXApproval(amount).then(() => {
+        exchangeTokens().then(resolve, reject);
+      }, () => {
+        this.HEXTokenContract.methods.approve(this.HEXExchangeContract.options.address, amount).send({
+          from: fromAccount
+        }).then(() => {
+          exchangeTokens().then(resolve, reject);
+        }, reject);
+      });
+    });
+  }
+
+
+  private checkUSDCApproval(amount): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.USDCTokenContract.methods.allowance(
+        this.USDCTokenContract.givenProvider.selectedAddress,
+        this.USDCExchangeContract.options.address
+      ).call().then((allowance: string) => {
+        const allow = new BigNumber(allowance);
+        const allowed = allow.minus(amount);
+        console.log(allowance, amount);
+        allowed.isNegative() ? reject() : resolve();
+      });
+    });
+  }
+
+  public sendUSDC(amount) {
+    const fromAccount = this.USDCExchangeContract.givenProvider.selectedAddress;
+    const exchangeTokens = () => {
+      return this.USDCExchangeContract.methods.exchangeUsdc(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return new Promise((resolve, reject) => {
+      this.checkUSDCApproval(amount).then(() => {
+        exchangeTokens().then(resolve, reject);
+      }, () => {
+        this.USDCTokenContract.methods.approve(this.USDCExchangeContract.options.address, amount).send({
+          from: fromAccount
+        }).then(() => {
+          exchangeTokens().then(resolve, reject);
+        }, reject);
+      });
+    });
+  }
+
 
 
 
@@ -474,14 +517,17 @@ export class Contract {
 
 
     return Promise.all(promises).then((res) => {
-      const convertedResult = {};
+      const convertedResult = {} as any;
       res.forEach((coinItem) => {
         convertedResult[coinItem.key] = coinItem.val.map((oneCoinValue, index) => {
           return {
             coin: dividendsKeys[index],
-            value: +oneCoinValue
+            value: new BigNumber(oneCoinValue)
           };
         });
+      });
+      convertedResult.claimedDividendsTotal.forEach((oneItem, index) => {
+        oneItem.value = oneItem.value.plus(convertedResult.previousDividendsTotal[index].value.times(0.1));
       });
       return convertedResult;
     });
