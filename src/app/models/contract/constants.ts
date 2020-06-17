@@ -19,14 +19,14 @@ export const ContractConstants = {
     },
     mainnet: {
       HEX: '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39',
-      HXY: '0x673CA2D1cAC9492c0Db256CD9F92267AC3D69aF9',
+      HXY: '0xb93E4E04E1Dc8Bc64107407e87B71144F1A6C163',
       USDC: '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48',
-      ETH_EXCHANGE: '0x5C40C8b461f43Ac559c5A335f93908FAe6f62Ab2',
-      HEX_EXCHANGE: '0x7855B1cF117801F9494eA42CCE9b193A6815AD7b',
-      USDC_EXCHANGE: '0xD9dDFC102b0E31931D5A4d816EcaedAC3291A1a0',
-      DIVIDENDS: '0x6b57b218D8E2D211Ffb6128696Ad9b1cB56b20f9',
-      UNISWAP: '0xF8A6fD6E8127Cd24b31c29d3CA413Edc98a96b14',
-      UNISWAP_USDC: '0x39359Cad8339Adf177C057FecC08F8Ac32e70F04'
+      ETH_EXCHANGE: '0x742e26004FCfD8752E0DC5F88A25d04Dc18Fa30C',
+      HEX_EXCHANGE: '0xDFaa301D92b7B0b50Bdf80BEBF058e9C3aaF44Af',
+      USDC_EXCHANGE: '0xcECf95578002d8A506889BA17aD392ca8b8c87e1',
+      DIVIDENDS: '0x56eF59318fe57aA3bC358e91E5082759046f746a',
+      UNISWAP: '0xf7152AE49E7433020020def369698F2d8F18E0A0',
+      UNISWAP_USDC: '0x3bE44f3Ac8fAb87F70A75355E424772B88280cFf'
     }
   },
   ABIs: {
@@ -245,449 +245,449 @@ export const ContractConstants = {
       }
     ],
     HEX: [
-      {
-        constant: true,
-        inputs: [],
-        name: 'name',
-        outputs: [
-          {
-            name: '',
-            type: 'string'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_spender',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'approve',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'totalSupply',
-        outputs: [
-          {
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_from',
-            type: 'address'
-          },
-          {
-            name: '_to',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'transferFrom',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'decimals',
-        outputs: [
-          {
-            name: '',
-            type: 'uint8'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: '_owner',
-            type: 'address'
-          }
-        ],
-        name: 'balanceOf',
-        outputs: [
-          {
-            name: 'balance',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'symbol',
-        outputs: [
-          {
-            name: '',
-            type: 'string'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_to',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'transfer',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: '_owner',
-            type: 'address'
-          },
-          {
-            name: '_spender',
-            type: 'address'
-          }
-        ],
-        name: 'allowance',
-        outputs: [
-          {
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        payable: true,
-        stateMutability: 'payable',
-        type: 'fallback'
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            name: 'owner',
-            type: 'address'
-          },
-          {
-            indexed: true,
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            indexed: false,
-            name: 'value',
-            type: 'uint256'
-          }
-        ],
-        name: 'Approval',
-        type: 'event'
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            name: 'from',
-            type: 'address'
-          },
-          {
-            indexed: true,
-            name: 'to',
-            type: 'address'
-          },
-          {
-            indexed: false,
-            name: 'value',
-            type: 'uint256'
-          }
-        ],
-        name: 'Transfer',
-        type: 'event'
-      }
-    ],
+        {
+          constant: true,
+          inputs: [],
+          name: 'name',
+          outputs: [
+            {
+              name: '',
+              type: 'string'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_spender',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'approve',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'totalSupply',
+          outputs: [
+            {
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_from',
+              type: 'address'
+            },
+            {
+              name: '_to',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'transferFrom',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'decimals',
+          outputs: [
+            {
+              name: '',
+              type: 'uint8'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [
+            {
+              name: '_owner',
+              type: 'address'
+            }
+          ],
+          name: 'balanceOf',
+          outputs: [
+            {
+              name: 'balance',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'symbol',
+          outputs: [
+            {
+              name: '',
+              type: 'string'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_to',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'transfer',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [
+            {
+              name: '_owner',
+              type: 'address'
+            },
+            {
+              name: '_spender',
+              type: 'address'
+            }
+          ],
+          name: 'allowance',
+          outputs: [
+            {
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          payable: true,
+          stateMutability: 'payable',
+          type: 'fallback'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              name: 'owner',
+              type: 'address'
+            },
+            {
+              indexed: true,
+              name: 'spender',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256'
+            }
+          ],
+          name: 'Approval',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              name: 'from',
+              type: 'address'
+            },
+            {
+              indexed: true,
+              name: 'to',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256'
+            }
+          ],
+          name: 'Transfer',
+          type: 'event'
+        }
+      ],
     USDC: [
-      {
-        constant: true,
-        inputs: [],
-        name: 'name',
-        outputs: [
-          {
-            name: '',
-            type: 'string'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_spender',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'approve',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'totalSupply',
-        outputs: [
-          {
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_from',
-            type: 'address'
-          },
-          {
-            name: '_to',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'transferFrom',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'decimals',
-        outputs: [
-          {
-            name: '',
-            type: 'uint8'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: '_owner',
-            type: 'address'
-          }
-        ],
-        name: 'balanceOf',
-        outputs: [
-          {
-            name: 'balance',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [],
-        name: 'symbol',
-        outputs: [
-          {
-            name: '',
-            type: 'string'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        constant: false,
-        inputs: [
-          {
-            name: '_to',
-            type: 'address'
-          },
-          {
-            name: '_value',
-            type: 'uint256'
-          }
-        ],
-        name: 'transfer',
-        outputs: [
-          {
-            name: '',
-            type: 'bool'
-          }
-        ],
-        payable: false,
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        constant: true,
-        inputs: [
-          {
-            name: '_owner',
-            type: 'address'
-          },
-          {
-            name: '_spender',
-            type: 'address'
-          }
-        ],
-        name: 'allowance',
-        outputs: [
-          {
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        payable: false,
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        payable: true,
-        stateMutability: 'payable',
-        type: 'fallback'
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            name: 'owner',
-            type: 'address'
-          },
-          {
-            indexed: true,
-            name: 'spender',
-            type: 'address'
-          },
-          {
-            indexed: false,
-            name: 'value',
-            type: 'uint256'
-          }
-        ],
-        name: 'Approval',
-        type: 'event'
-      },
-      {
-        anonymous: false,
-        inputs: [
-          {
-            indexed: true,
-            name: 'from',
-            type: 'address'
-          },
-          {
-            indexed: true,
-            name: 'to',
-            type: 'address'
-          },
-          {
-            indexed: false,
-            name: 'value',
-            type: 'uint256'
-          }
-        ],
-        name: 'Transfer',
-        type: 'event'
-      }
-    ],
+        {
+          constant: true,
+          inputs: [],
+          name: 'name',
+          outputs: [
+            {
+              name: '',
+              type: 'string'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_spender',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'approve',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'totalSupply',
+          outputs: [
+            {
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_from',
+              type: 'address'
+            },
+            {
+              name: '_to',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'transferFrom',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'decimals',
+          outputs: [
+            {
+              name: '',
+              type: 'uint8'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [
+            {
+              name: '_owner',
+              type: 'address'
+            }
+          ],
+          name: 'balanceOf',
+          outputs: [
+            {
+              name: 'balance',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [],
+          name: 'symbol',
+          outputs: [
+            {
+              name: '',
+              type: 'string'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          constant: false,
+          inputs: [
+            {
+              name: '_to',
+              type: 'address'
+            },
+            {
+              name: '_value',
+              type: 'uint256'
+            }
+          ],
+          name: 'transfer',
+          outputs: [
+            {
+              name: '',
+              type: 'bool'
+            }
+          ],
+          payable: false,
+          stateMutability: 'nonpayable',
+          type: 'function'
+        },
+        {
+          constant: true,
+          inputs: [
+            {
+              name: '_owner',
+              type: 'address'
+            },
+            {
+              name: '_spender',
+              type: 'address'
+            }
+          ],
+          name: 'allowance',
+          outputs: [
+            {
+              name: '',
+              type: 'uint256'
+            }
+          ],
+          payable: false,
+          stateMutability: 'view',
+          type: 'function'
+        },
+        {
+          payable: true,
+          stateMutability: 'payable',
+          type: 'fallback'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              name: 'owner',
+              type: 'address'
+            },
+            {
+              indexed: true,
+              name: 'spender',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256'
+            }
+          ],
+          name: 'Approval',
+          type: 'event'
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              name: 'from',
+              type: 'address'
+            },
+            {
+              indexed: true,
+              name: 'to',
+              type: 'address'
+            },
+            {
+              indexed: false,
+              name: 'value',
+              type: 'uint256'
+            }
+          ],
+          name: 'Transfer',
+          type: 'event'
+        }
+      ],
     HXY: [
       {
         inputs: [
@@ -702,9 +702,9 @@ export const ContractConstants = {
             type: 'address'
           },
           {
-            internalType: 'address',
-            name: '_lockSupAddress',
-            type: 'address'
+            internalType: 'uint256',
+            name: '_liqSupAmount',
+            type: 'uint256'
           }
         ],
         stateMutability: 'nonpayable',
@@ -865,7 +865,22 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
+        name: 'DEPLOYER_ROLE',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -878,7 +893,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -891,7 +907,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -904,7 +921,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -923,7 +941,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -947,7 +966,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -990,7 +1010,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1003,7 +1024,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1016,7 +1038,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1059,7 +1082,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1098,7 +1122,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1117,7 +1142,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1141,7 +1167,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1160,7 +1187,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1173,7 +1201,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1192,7 +1221,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1205,7 +1235,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1247,7 +1278,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1290,7 +1322,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1303,7 +1336,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1352,7 +1386,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1365,7 +1400,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1431,7 +1467,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1444,7 +1481,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1457,7 +1495,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1470,7 +1509,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1483,7 +1523,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1496,7 +1537,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1509,7 +1551,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [],
@@ -1522,59 +1565,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'getTeamSupply',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'getTeamLockPeriod',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'getLockedSupply',
-        outputs: [
-          {
-            internalType: 'uint256',
-            name: '',
-            type: 'uint256'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
-      },
-      {
-        inputs: [],
-        name: 'getLockedSupplyAddress',
-        outputs: [
-          {
-            internalType: 'address',
-            name: '',
-            type: 'address'
-          }
-        ],
-        stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1598,7 +1590,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1676,21 +1669,19 @@ export const ContractConstants = {
         type: 'function'
       },
       {
-        inputs: [],
-        name: 'releaseFrozenTeam',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
         inputs: [
           {
-            internalType: 'uint256',
-            name: '_startDate',
-            type: 'uint256'
+            internalType: 'address[6]',
+            name: '_lockSupAddresses',
+            type: 'address[6]'
+          },
+          {
+            internalType: 'uint256[10]',
+            name: '_unlockDates',
+            type: 'uint256[10]'
           }
         ],
-        name: 'releaseLockedSupply',
+        name: 'premintLocked',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -1712,7 +1703,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       },
       {
         inputs: [
@@ -1731,7 +1723,8 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function'
+        type: 'function',
+        constant: true
       }
     ],
     ETH_EXCHANGE: [
@@ -1750,6 +1743,11 @@ export const ContractConstants = {
           {
             internalType: 'address',
             name: '_uniswapEth',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_adminAddress',
             type: 'address'
           }
         ],
@@ -1809,6 +1807,20 @@ export const ContractConstants = {
       {
         inputs: [],
         name: 'DEFAULT_ADMIN_ROLE',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
+        name: 'DEPLOYER_ROLE',
         outputs: [
           {
             internalType: 'bytes32',
@@ -2044,32 +2056,6 @@ export const ContractConstants = {
           }
         ],
         name: 'revokeRole',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address payable',
-            name: 'newDividendsContract',
-            type: 'address'
-          }
-        ],
-        name: 'setDividendsContract',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHxyToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHxyToken',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -2178,6 +2164,11 @@ export const ContractConstants = {
             internalType: 'address payable',
             name: '_dividendsContract',
             type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_adminAddress',
+            type: 'address'
           }
         ],
         stateMutability: 'nonpayable',
@@ -2236,6 +2227,20 @@ export const ContractConstants = {
       {
         inputs: [],
         name: 'DEFAULT_ADMIN_ROLE',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
+        name: 'DEPLOYER_ROLE',
         outputs: [
           {
             internalType: 'bytes32',
@@ -2471,32 +2476,6 @@ export const ContractConstants = {
           }
         ],
         name: 'revokeRole',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address payable',
-            name: 'newDividendsContract',
-            type: 'address'
-          }
-        ],
-        name: 'setDividendsContract',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHxyToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHxyToken',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -2553,19 +2532,6 @@ export const ContractConstants = {
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHexToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHexToken',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
       }
     ],
     USDC_EXCHANGE: [
@@ -2594,6 +2560,11 @@ export const ContractConstants = {
           {
             internalType: 'address',
             name: '_uniswapUsdc',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_adminAddress',
             type: 'address'
           }
         ],
@@ -2653,6 +2624,20 @@ export const ContractConstants = {
       {
         inputs: [],
         name: 'DEFAULT_ADMIN_ROLE',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function',
+        constant: true
+      },
+      {
+        inputs: [],
+        name: 'DEPLOYER_ROLE',
         outputs: [
           {
             internalType: 'bytes32',
@@ -2888,32 +2873,6 @@ export const ContractConstants = {
           }
         ],
         name: 'revokeRole',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address payable',
-            name: 'newDividendsContract',
-            type: 'address'
-          }
-        ],
-        name: 'setDividendsContract',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newHxyToken',
-            type: 'address'
-          }
-        ],
-        name: 'setHxyToken',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -3044,19 +3003,6 @@ export const ContractConstants = {
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
-      },
-      {
-        inputs: [
-          {
-            internalType: 'address',
-            name: 'newUsdcToken',
-            type: 'address'
-          }
-        ],
-        name: 'setUsdcToken',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function'
       }
     ],
     DIVIDENDS: [
@@ -3091,6 +3037,11 @@ export const ContractConstants = {
             internalType: 'address payable',
             name: '_thirdTeamAddress',
             type: 'address'
+          },
+          {
+            internalType: 'uint256',
+            name: '_initialRecordTime',
+            type: 'uint256'
           }
         ],
         stateMutability: 'nonpayable',
@@ -3157,8 +3108,20 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
+      },
+      {
+        inputs: [],
+        name: 'DEPLOYER_ROLE',
+        outputs: [
+          {
+            internalType: 'bytes32',
+            name: '',
+            type: 'bytes32'
+          }
+        ],
+        stateMutability: 'view',
+        type: 'function'
       },
       {
         inputs: [],
@@ -3171,8 +3134,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3191,8 +3153,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3216,8 +3177,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3236,8 +3196,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3250,8 +3209,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3293,8 +3251,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3334,8 +3291,7 @@ export const ContractConstants = {
       },
       {
         stateMutability: 'payable',
-        type: 'receive',
-        payable: true
+        type: 'receive'
       },
       {
         inputs: [],
@@ -3348,8 +3304,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3362,8 +3317,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3376,8 +3330,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3396,8 +3349,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -3416,8 +3368,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3430,8 +3381,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3444,8 +3394,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3458,8 +3407,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3472,8 +3420,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3486,8 +3433,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3500,8 +3446,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -3514,16 +3459,14 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
         name: 'recordDividendsETH',
         outputs: [],
         stateMutability: 'payable',
-        type: 'function',
-        payable: true
+        type: 'function'
       },
       {
         inputs: [

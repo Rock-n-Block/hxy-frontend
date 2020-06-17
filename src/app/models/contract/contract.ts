@@ -401,9 +401,7 @@ export class Contract {
       this.HXYTokenContract.methods.cap().call().then((res) => {
         return {key: 'maxSupply', value: res};
       }),
-      this.HXYTokenContract.methods.getLockedSupply().call().then((res) => {
-        return {key: 'locked', value: res};
-      }),
+      Promise.resolve({key: 'locked', value: '600000000000000'}),
       this.HXYTokenContract.methods.getTotalHxyMinted().call().then((res) => {
         return {key: 'totalSupply', value: res};
       }),
