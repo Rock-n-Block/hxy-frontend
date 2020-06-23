@@ -71,6 +71,9 @@ export class Contract {
     );
   }
 
+  public secondsOfDay() {
+    return ContractConstants[this.network].SECONDS_OF_DAY;
+  }
 
   private checkTx(tx, resolve, reject) {
     this.web3Service.Web3.eth.getTransaction(tx.transactionHash).then((txInfo) => {
@@ -445,7 +448,6 @@ export class Contract {
           });
         });
         return Promise.all(allFreezingsPromises).then((freezings) => {
-          console.log(freezings);
           return freezings.filter((freezing: any) => {
             return +freezing.freezeAmount > 0;
           }).sort((a: any, b: any) => {

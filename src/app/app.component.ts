@@ -4,6 +4,7 @@ import { MetamaskService } from './services/web3/web3.service';
 import BigNumber from 'bignumber.js';
 import {Contract} from './models/contract/contract';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,6 +33,8 @@ export class AppComponent {
       freezeDate?: any;
     }
   };
+
+  public latestFreeze: number;
 
   public coinsDecimals: {
     ETH: number;
@@ -298,6 +301,7 @@ export class AppComponent {
     return this.contract.getUserFreezings().then((res) => {
       this.freezings = res.map((freez) => {
         const founded = this.freezings ? this.freezings.find(fr => freez.id === fr.id) as any : false;
+        this.latestFreeze = Math.max(this.latestFreeze || 0, freez.startDate);
         if (founded) {
           return {...founded, ...freez};
         } else {
@@ -307,6 +311,15 @@ export class AppComponent {
       return this.freezings;
     });
   }
+
+
+  get todayFreezed() {
+    if (!(this.latestFreeze && this.expiredIn)) {
+      return;
+    }
+    return this.latestFreeze > (this.expiredIn.next - this.expiredIn.period);
+  }
+
 
   private hexExchange() {
     return this.contract.sendHEX(this.formData.send.amount);

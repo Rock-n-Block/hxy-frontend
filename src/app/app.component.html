@@ -251,13 +251,13 @@
       </div>
 
       <div class="calculate-controls_element calculate-controls_label"
-           *ngIf="!expiredIn?.requireRequest && !isActiveClaim && ((freezings && !freezings.length) || (dividends === null))">
+           *ngIf="!expiredIn?.requireRequest && !isActiveClaim && ((freezings && !freezings.length) || (dividends === null) || todayFreezed)">
         <small>No dividends for today</small>
       </div>
 
 
       <div class="calculate-controls_element calculate-controls_label no-padding"
-           *ngIf="dividends && coinsDecimals && !expiredIn?.requireRequest && !isActiveClaim && !(freezings && !freezings.length)">
+           *ngIf="dividends && coinsDecimals && !expiredIn?.requireRequest && !isActiveClaim && !(freezings && !freezings.length) && !todayFreezed">
         <div class="divided-coins">
           <span *ngFor="let dividend of dividends;" class="divided-coins_item">
             <img class="divided-coins_item_icon" [src]="coinsIcons[dividend.coin]">
@@ -272,7 +272,7 @@
       <div class="calculate-controls_element calculate-controls_btn" *ngIf="expiredIn">
         <button type="submit" class="calculate-controls_button"
                 [ngClass]="{'in-progress': form3Progress}"
-                [disabled]="form3Progress || isActiveClaim || (freezings && !freezings.length)"
+                [disabled]="form3Progress || isActiveClaim || (freezings && !freezings.length) || todayFreezed"
                 (click)="claimDividends()">
         <span class="lds-ellipsis" *ngIf="form3Progress">
           <span class="lds-ellipsis-container">
