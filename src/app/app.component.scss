@@ -142,6 +142,10 @@
     &.ng-touched.ng-dirty.ng-invalid {
       //border: 1px solid #a00;
     }
+    &__address {
+      font-size: 15px;
+      width: 400px;
+    }
   }
   &_button {
     vertical-align: middle;
@@ -171,7 +175,7 @@
       }
     }
   }
-  & &_button {
+  & &_button:not(.auto-width) {
     width: 140px;
   }
   &_state {

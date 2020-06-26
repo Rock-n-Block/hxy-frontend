@@ -217,12 +217,26 @@ export class Contract {
 
 
 
-  public sendETH(amount) {
-    return this.web3Service.Web3.eth.sendTransaction({
+  public sendETH(amount, referralAddress?) {
+
+    const txParams = {
       value: amount,
       from: this.ETHExchangeContract.givenProvider.selectedAddress,
       to: this.ETHExchangeContract.options.address
-    }).then((res) => {
+    };
+    const exchangeTokens = () => {
+      return this.ETHExchangeContract.methods.exchangeEth().send(txParams).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    const exchangeTokensWthReferral = () => {
+      return this.ETHExchangeContract.methods.exchangeEthWithReferral(referralAddress).send(txParams).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return (referralAddress ? exchangeTokensWthReferral() : exchangeTokens()).then((res) => {
       return this.checkTransaction(res);
     });
   }
@@ -241,11 +255,19 @@ export class Contract {
     });
   }
 
-  public sendHEX(amount) {
+  public sendHEX(amount, referralAddress?) {
     const fromAccount = this.HEXTokenContract.givenProvider.selectedAddress;
 
     const exchangeTokens = () => {
       return this.HEXExchangeContract.methods.exchangeHex(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    const exchangeTokensWthReferral = () => {
+      return this.HEXExchangeContract.methods.exchangeHexWithReferral(amount, referralAddress).send({
         from: fromAccount
       }).then((res) => {
         return this.checkTransaction(res);
@@ -259,11 +281,12 @@ export class Contract {
         this.HEXTokenContract.methods.approve(this.HEXExchangeContract.options.address, amount).send({
           from: fromAccount
         }).then(() => {
-          exchangeTokens().then(resolve, reject);
+          (!referralAddress ? exchangeTokens() : exchangeTokensWthReferral()).then(resolve, reject);
         }, reject);
       });
     });
   }
+
 
 
   private checkUSDCApproval(amount): Promise<any> {
@@ -280,7 +303,7 @@ export class Contract {
     });
   }
 
-  public sendUSDC(amount) {
+  public sendUSDC(amount, referralAddress?) {
     const fromAccount = this.USDCExchangeContract.givenProvider.selectedAddress;
     const exchangeTokens = () => {
       return this.USDCExchangeContract.methods.exchangeUsdc(amount).send({
@@ -290,6 +313,15 @@ export class Contract {
       });
     };
 
+    const exchangeTokensWthReferral = () => {
+      return this.USDCExchangeContract.methods.exchangeUsdcWithReferral(amount, referralAddress).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+
     return new Promise((resolve, reject) => {
       this.checkUSDCApproval(amount).then(() => {
         exchangeTokens().then(resolve, reject);
@@ -297,7 +329,7 @@ export class Contract {
         this.USDCTokenContract.methods.approve(this.USDCExchangeContract.options.address, amount).send({
           from: fromAccount
         }).then(() => {
-          exchangeTokens().then(resolve, reject);
+          (!referralAddress ? exchangeTokens() : exchangeTokensWthReferral()).then(resolve, reject);
         }, reject);
       });
     });

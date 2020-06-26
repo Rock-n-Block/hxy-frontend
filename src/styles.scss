@@ -38,16 +38,16 @@ input[type=number] {
 }
 
 input::-webkit-input-placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.6);
 }
 input:-ms-input-placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.6);
 }
 input::-ms-input-placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.6);
 }
 input::placeholder {
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 

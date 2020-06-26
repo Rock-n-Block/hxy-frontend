@@ -8,14 +8,14 @@ export const ContractConstants = {
   ADDRESSES: {
     kovan: {
       HEX: '0x19C165F2093f2CF5F26b9b2F3393271f63c745DF',
-      HXY: '0xad313adC99284E7F0E7a9D920aA1DA662c23764d',
+      HXY: '0xBB00dDEaEA05347d88B2851B319f2a2046C1c24e',
       USDC: '0x05F0a875C881D90D3cC7464c9d914678572FDa1A',
-      ETH_EXCHANGE: '0x117ED49E450EC7D3ac3fA32Cd6684a93D5BCeA45',
-      HEX_EXCHANGE: '0x2f56Cd930F9b944e1830d6ed4F31a764Ab6686d4',
-      USDC_EXCHANGE: '0x3C6853B4c9854e50A5092E999766bF740937e62D',
-      DIVIDENDS: '0x526CFeA9B86425b8094e8f4150966494b090F9A6',
-      UNISWAP: '0x5C40C8b461f43Ac559c5A335f93908FAe6f62Ab2',
-      UNISWAP_USDC: '0xFcA3e24A438D3029E3f5e57489DA4fb05A9D7600'
+      ETH_EXCHANGE: '0xb726087788CBf2C6D705DE66Bd298Ce0Ec6D0F33',
+      HEX_EXCHANGE: '0x1dA4fF418Ef57A45981d0f651d273F6b19Be4D35',
+      USDC_EXCHANGE: '0x643FD2F497C76471a464531D1D9ddc553dC23E86',
+      DIVIDENDS: '0x72c50097fD9C2978B71C72C6BcBc1484F438380B',
+      UNISWAP: '0xa602D95f7DCF54fb684De992028A177eE4b445c5',
+      UNISWAP_USDC: '0x4380B1644BBAAb540f661B61e0dcbC2983089f9D'
     },
     mainnet: {
       HEX: '0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39',
@@ -1742,6 +1742,11 @@ export const ContractConstants = {
           },
           {
             internalType: 'address',
+            name: '_referralSender',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
             name: '_uniswapEth',
             type: 'address'
           },
@@ -1815,8 +1820,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1829,8 +1833,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1843,8 +1846,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1857,8 +1859,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1871,8 +1872,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1885,8 +1885,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1899,8 +1898,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1919,8 +1917,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1944,8 +1941,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -1964,8 +1960,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -1978,8 +1973,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2021,8 +2015,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2087,9 +2080,21 @@ export const ContractConstants = {
         type: 'function'
       },
       {
+        inputs: [
+          {
+            internalType: 'address',
+            name: '_referralSender',
+            type: 'address'
+          }
+        ],
+        name: 'setReferralSenderContract',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
         stateMutability: 'payable',
-        type: 'receive',
-        payable: true
+        type: 'receive'
       },
       {
         inputs: [],
@@ -2102,8 +2107,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2135,16 +2139,27 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
         name: 'exchangeEth',
         outputs: [],
         stateMutability: 'payable',
-        type: 'function',
-        payable: true
+        type: 'function'
+      },
+      {
+        inputs: [
+          {
+            internalType: 'address',
+            name: 'referralAddress',
+            type: 'address'
+          }
+        ],
+        name: 'exchangeEthWithReferral',
+        outputs: [],
+        stateMutability: 'payable',
+        type: 'function'
       }
     ],
     HEX_EXCHANGE: [
@@ -2163,6 +2178,11 @@ export const ContractConstants = {
           {
             internalType: 'address payable',
             name: '_dividendsContract',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_referralSender',
             type: 'address'
           },
           {
@@ -2235,8 +2255,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2249,8 +2268,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2263,8 +2281,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2277,8 +2294,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2291,8 +2307,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2305,8 +2320,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2319,8 +2333,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2339,8 +2352,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2364,8 +2376,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2384,8 +2395,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2398,8 +2408,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2441,8 +2450,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2507,6 +2515,19 @@ export const ContractConstants = {
         type: 'function'
       },
       {
+        inputs: [
+          {
+            internalType: 'address',
+            name: '_referralSender',
+            type: 'address'
+          }
+        ],
+        name: 'setReferralSenderContract',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
         inputs: [],
         name: 'getHexTokenAddress',
         outputs: [
@@ -2517,8 +2538,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2529,6 +2549,24 @@ export const ContractConstants = {
           }
         ],
         name: 'exchangeHex',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'amount',
+            type: 'uint256'
+          },
+          {
+            internalType: 'address',
+            name: 'referralAddress',
+            type: 'address'
+          }
+        ],
+        name: 'exchangeHexWithReferral',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'
@@ -2550,6 +2588,11 @@ export const ContractConstants = {
           {
             internalType: 'address payable',
             name: '_dividendsContract',
+            type: 'address'
+          },
+          {
+            internalType: 'address',
+            name: '_referralSender',
             type: 'address'
           },
           {
@@ -2632,8 +2675,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2646,8 +2688,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2660,8 +2701,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2674,8 +2714,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2688,8 +2727,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2702,8 +2740,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2716,8 +2753,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2736,8 +2772,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2761,8 +2796,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2781,8 +2815,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2795,8 +2828,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2838,8 +2870,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2904,6 +2935,19 @@ export const ContractConstants = {
         type: 'function'
       },
       {
+        inputs: [
+          {
+            internalType: 'address',
+            name: '_referralSender',
+            type: 'address'
+          }
+        ],
+        name: 'setReferralSenderContract',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
         inputs: [],
         name: 'getUniswapGetterInstanceEth',
         outputs: [
@@ -2914,8 +2958,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2928,8 +2971,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2948,8 +2990,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [],
@@ -2962,8 +3003,7 @@ export const ContractConstants = {
           }
         ],
         stateMutability: 'view',
-        type: 'function',
-        constant: true
+        type: 'function'
       },
       {
         inputs: [
@@ -2974,6 +3014,24 @@ export const ContractConstants = {
           }
         ],
         name: 'exchangeUsdc',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function'
+      },
+      {
+        inputs: [
+          {
+            internalType: 'uint256',
+            name: 'amount',
+            type: 'uint256'
+          },
+          {
+            internalType: 'address',
+            name: 'referralAddress',
+            type: 'address'
+          }
+        ],
+        name: 'exchangeUsdcWithReferral',
         outputs: [],
         stateMutability: 'nonpayable',
         type: 'function'

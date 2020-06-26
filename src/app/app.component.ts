@@ -24,6 +24,7 @@ export class AppComponent {
   public network: string;
   public formData: {
     send: {
+      referralAddress?: string;
       coin: any;
       amount?: string
     },
@@ -321,29 +322,38 @@ export class AppComponent {
   }
 
 
-  private hexExchange() {
-    return this.contract.sendHEX(this.formData.send.amount);
+  private hexExchange(withReferral?) {
+    return this.contract.sendHEX(
+      this.formData.send.amount,
+      withReferral ? this.formData.send.referralAddress : false
+    );
   }
 
-  private ethExchange() {
-    return this.contract.sendETH(this.formData.send.amount);
+  private ethExchange(withReferral?) {
+    return this.contract.sendETH(
+      this.formData.send.amount,
+      withReferral ? this.formData.send.referralAddress : false
+    );
   }
 
-  private usdcExchange() {
-    return this.contract.sendUSDC(this.formData.send.amount);
+  private usdcExchange(withReferral?) {
+    return this.contract.sendUSDC(
+      this.formData.send.amount,
+      withReferral ? this.formData.send.referralAddress : false
+    );
   }
 
-  public exchangeAmount() {
+  public exchangeAmount(withReferral?) {
     let transactionPromise;
     switch (this.formData.send.coin) {
       case 'HEX':
-        transactionPromise = this.hexExchange();
+        transactionPromise = this.hexExchange(withReferral);
         break;
       case 'ETH':
-        transactionPromise = this.ethExchange();
+        transactionPromise = this.ethExchange(withReferral);
         break;
       case 'USDC':
-        transactionPromise = this.usdcExchange();
+        transactionPromise = this.usdcExchange(withReferral);
         break;
     }
     this.form1Progress = true;
@@ -351,6 +361,7 @@ export class AppComponent {
       this.updateDynamicInfo();
       this.getAccountBalances();
       this.formData.send.amount = '';
+      this.formData.send.referralAddress = '';
     }).finally(() => {
       this.form1Progress = false;
     });

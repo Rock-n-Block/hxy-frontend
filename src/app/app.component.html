@@ -37,96 +37,129 @@
   </div>
 
 
-  <form class="calculate-controls calculate-controls__1"
+  <form class="calculate-controls calculate-controls__1 no-flex"
         *ngIf="coinsDecimals && amountLimits && rates"
         #sendForm="ngForm" name="credit-form" [ngClass]="{disabled: form1Progress}">
-    <div class="calculate-controls_element calculate-controls_label">
-      Send
-    </div>
 
-    <div class="calculate-controls_element calculate-controls_checkboxes">
-      <div class="calculate-controls_checkboxes_group">
-        <label class="checkbox-decor">
-          <input type="radio" class="checkbox-decor_input"
-                 required
-                 name="token-type" value="HEX"
-                 [(ngModel)]="formData.send.coin" (change)="changeCoin()">
-          <span class="checkbox-decor_content">
-          <span class="checkbox-decor_content_img">
-            <img src="./assets/img/hex-logo.png">
-          </span>
-          <span class="checkbox-decor_content_text">HEX</span>
-        </span>
-          <span class="checkbox-decor_outside"></span>
-          <span class="checkbox-decor_checker"></span>
-        </label>
-
-        <label class="checkbox-decor">
-          <input type="radio" class="checkbox-decor_input"
-                 required
-                 name="token-type" value="ETH"
-                 [(ngModel)]="formData.send.coin" (change)="changeCoin()">
-          <span class="checkbox-decor_content">
-            <span class="checkbox-decor_content_img">
-              <img src="./assets/img/eth-logo.png">
-            </span>
-            <span class="checkbox-decor_content_text">ETH</span>
-          </span>
-          <span class="checkbox-decor_outside"></span>
-          <span class="checkbox-decor_checker"></span>
-        </label>
-
-        <label class="checkbox-decor">
-          <input type="radio" class="checkbox-decor_input"
-                 required
-                 [(ngModel)]="formData.send.coin"
-                 name="token-type" value="USDC" (change)="changeCoin()">
-          <span class="checkbox-decor_content">
-            <span class="checkbox-decor_content_img">
-              <img src="./assets/img/usdc-logo.svg">
-            </span>
-            <span class="checkbox-decor_content_text">USDC</span>
-          </span>
-          <span class="checkbox-decor_outside"></span>
-          <span class="checkbox-decor_checker"></span>
-        </label>
-
+    <div class="flex-block left-align">
+      <div class="calculate-controls_element calculate-controls_label">
+        Send
       </div>
-    </div>
 
-    <div class="calculate-controls_element calculate-controls_textfield">
-
-
-      <input type="text" class="calculate-controls_input" name="amount"
-             [required]="true"
-             placeholder="Enter amount"
-             [appBigNumber]="{
-                decimals: coinsDecimals[formData.send.coin],
-                min: amountLimits[formData.send.coin].min,
-                max: amountLimits[formData.send.coin].max
-             }"
-             [minValueChange]="onChangeCoinEmitter"
-             [(ngModel)]="formData.send.amount">
-    </div>
-
-    <div class="calculate-controls_element calculate-controls_label">
-      <small>Receive</small>
-      {{ hxyAmount | number : '.0-4' }} HXY
-    </div>
-
-    <div class="calculate-controls_element calculate-controls_btn">
-
-      <button type="submit" class="calculate-controls_button"
-              [ngClass]="{'in-progress': form1Progress}"
-              [disabled]="!sendForm.valid || form1Progress"
-              (click)="exchangeAmount()">
-        <span class="lds-ellipsis" *ngIf="form1Progress">
-          <span class="lds-ellipsis-container">
-            <span></span><span></span><span></span><span></span>
+      <div class="calculate-controls_element calculate-controls_checkboxes">
+        <div class="calculate-controls_checkboxes_group">
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   name="token-type" value="HEX"
+                   [(ngModel)]="formData.send.coin" (change)="changeCoin()">
+            <span class="checkbox-decor_content">
+            <span class="checkbox-decor_content_img">
+              <img src="./assets/img/hex-logo.png">
+            </span>
+            <span class="checkbox-decor_content_text">HEX</span>
           </span>
-        </span>
-        <span>Transform</span>
-      </button>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   name="token-type" value="ETH"
+                   [(ngModel)]="formData.send.coin" (change)="changeCoin()">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/eth-logo.png">
+              </span>
+              <span class="checkbox-decor_content_text">ETH</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   [(ngModel)]="formData.send.coin"
+                   name="token-type" value="USDC" (change)="changeCoin()">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/usdc-logo.svg">
+              </span>
+              <span class="checkbox-decor_content_text">USDC</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+        </div>
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_textfield">
+
+
+        <input type="text" class="calculate-controls_input" name="amount"
+               [required]="true"
+               placeholder="Enter amount"
+               [appBigNumber]="{
+                  decimals: coinsDecimals[formData.send.coin],
+                  min: amountLimits[formData.send.coin].min,
+                  max: amountLimits[formData.send.coin].max
+               }"
+               [minValueChange]="onChangeCoinEmitter"
+               [(ngModel)]="formData.send.amount">
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_label">
+        <small>Receive</small>
+        {{ hxyAmount | number : '.0-4' }} HXY
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_btn">
+
+        <button type="submit" class="calculate-controls_button"
+                [ngClass]="{'in-progress': form1Progress}"
+                [disabled]="!sendForm.valid || form1Progress"
+                (click)="exchangeAmount()">
+          <span class="lds-ellipsis" *ngIf="form1Progress">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
+            </span>
+          </span>
+          <span>Transform</span>
+        </button>
+      </div>
+    </div><br/>
+
+    {{ sendForm.value['referral-address'] }}
+    <div class="flex-block">
+      <div class="calculate-controls_element calculate-controls_label">
+        <small>Enter Referral address if any</small>
+      </div>
+      <div class="calculate-controls_element calculate-controls_textfield">
+        <input type="text"
+               #referralAddress
+               class="calculate-controls_input calculate-controls_input__address"
+               [(ngModel)]="formData.send.referralAddress"
+               [ngModelOptions]="{standalone: true}"
+               placeholder="0x0000000000000000000000000000000000000000"
+               pattern="0x[a-fA-F0-9]{40}">
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_btn">
+        <button type="submit" class="calculate-controls_button auto-width"
+                [ngClass]="{'in-progress': form1Progress}"
+                [disabled]="!sendForm.valid || form1Progress || !referralAddress.value || !referralAddress.checkValidity()"
+                (click)="exchangeAmount()">
+          <span class="lds-ellipsis" *ngIf="form1Progress">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
+            </span>
+          </span>
+          <span>Transform with Referral</span>
+        </button>
+      </div>
     </div>
   </form>
 
