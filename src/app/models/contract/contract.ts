@@ -275,13 +275,14 @@ export class Contract {
     };
 
     return new Promise((resolve, reject) => {
+      const method = !referralAddress ? exchangeTokens : exchangeTokensWthReferral;
       this.checkHEXApproval(amount).then(() => {
-        exchangeTokens().then(resolve, reject);
+        method().then(resolve, reject);
       }, () => {
         this.HEXTokenContract.methods.approve(this.HEXExchangeContract.options.address, amount).send({
           from: fromAccount
         }).then(() => {
-          (!referralAddress ? exchangeTokens() : exchangeTokensWthReferral()).then(resolve, reject);
+          method().then(resolve, reject);
         }, reject);
       });
     });
@@ -323,13 +324,14 @@ export class Contract {
 
 
     return new Promise((resolve, reject) => {
+      const method = !referralAddress ? exchangeTokens : exchangeTokensWthReferral;
       this.checkUSDCApproval(amount).then(() => {
-        exchangeTokens().then(resolve, reject);
+        method().then(resolve, reject);
       }, () => {
         this.USDCTokenContract.methods.approve(this.USDCExchangeContract.options.address, amount).send({
           from: fromAccount
         }).then(() => {
-          (!referralAddress ? exchangeTokens() : exchangeTokensWthReferral()).then(resolve, reject);
+          method().then(resolve, reject);
         }, reject);
       });
     });

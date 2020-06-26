@@ -151,7 +151,7 @@
         <button type="submit" class="calculate-controls_button auto-width"
                 [ngClass]="{'in-progress': form1Progress}"
                 [disabled]="!sendForm.valid || form1Progress || !referralAddress.value || !referralAddress.checkValidity()"
-                (click)="exchangeAmount()">
+                (click)="exchangeAmount(true)">
           <span class="lds-ellipsis" *ngIf="form1Progress">
             <span class="lds-ellipsis-container">
               <span></span><span></span><span></span><span></span>
