@@ -21,6 +21,7 @@ export class BigNumberDirective implements OnInit {
 
   @Input ('minValueChange') minValueChange;
   @Input ('maxValueChange') maxValueChange;
+  @Input ('decimalsChange') decimalsChange;
 
   @Input ('required') required;
 
@@ -50,6 +51,17 @@ export class BigNumberDirective implements OnInit {
 
     if (this.maxValueChange) {
       this.maxValueChange.subscribe(() => {
+        this.currentDecimals = !isNaN(this.appBigNumber.decimals) ? parseInt(this.appBigNumber.decimals, 10) : 0;
+        setTimeout(() => {
+          this.control.control.setValue(
+            this.latestValue
+          );
+        });
+      });
+    }
+
+    if (this.decimalsChange) {
+      this.decimalsChange.subscribe(() => {
         this.currentDecimals = !isNaN(this.appBigNumber.decimals) ? parseInt(this.appBigNumber.decimals, 10) : 0;
         setTimeout(() => {
           this.control.control.setValue(

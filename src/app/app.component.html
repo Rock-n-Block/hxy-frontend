@@ -402,6 +402,113 @@
 
   </div>
 
+  <br/>
+  <div class="forms-header">
+    <span class="forms-header_round">Send funds to Dividends contract</span>
+  </div>
+
+
+  <form class="calculate-controls calculate-controls__1 no-flex" #depositDividendsForm="ngForm"
+        *ngIf="coinsDecimals">
+
+    <div class="flex-block left-align">
+      <div class="calculate-controls_element calculate-controls_label">Send</div>
+
+      <div class="calculate-controls_element calculate-controls_checkboxes">
+        <div class="calculate-controls_checkboxes_group">
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   (change)="changeDividendsCoin()"
+                   [(ngModel)]="formData.fundsToDividends.coin"
+                   name="token-type" value="HEX">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/hex-logo.png">
+              </span>
+              <span class="checkbox-decor_content_text">HEX</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   (change)="changeDividendsCoin()"
+                   [(ngModel)]="formData.fundsToDividends.coin"
+                   name="token-type" value="ETH">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/eth-logo.png">
+              </span>
+              <span class="checkbox-decor_content_text">ETH</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   (change)="changeDividendsCoin()"
+                   [(ngModel)]="formData.fundsToDividends.coin"
+                   name="token-type" value="USDC">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/usdc-logo.svg">
+              </span>
+              <span class="checkbox-decor_content_text">USDC</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+
+          <label class="checkbox-decor">
+            <input type="radio" class="checkbox-decor_input"
+                   required
+                   [(ngModel)]="formData.fundsToDividends.coin"
+                   name="token-type" value="HXY">
+            <span class="checkbox-decor_content">
+              <span class="checkbox-decor_content_img">
+                <img src="./assets/img/hxy-logo.png">
+              </span>
+              <span class="checkbox-decor_content_text">HXY</span>
+            </span>
+            <span class="checkbox-decor_outside"></span>
+            <span class="checkbox-decor_checker"></span>
+          </label>
+        </div>
+      </div>
+
+
+      <div class="calculate-controls_element calculate-controls_textfield">
+        <input type="text" class="calculate-controls_input" name="amount"
+               required
+               [appBigNumber]="{
+                  decimals: coinsDecimals[formData.fundsToDividends.coin],
+                  min: 0
+               }"
+               [decimalsChange]="onChangeDividendsCoinEmitter"
+               [(ngModel)]="formData.fundsToDividends.amount"
+               placeholder="Enter amount">
+      </div>
+
+      <div class="calculate-controls_element calculate-controls_btn">
+        <button type="submit" class="calculate-controls_button"
+                (click)="recordDividends()"
+                [disabled]="!depositDividendsForm.valid || dividendsFundsFormProgress">
+          <span class="lds-ellipsis" *ngIf="dividendsFundsFormProgress">
+            <span class="lds-ellipsis-container">
+              <span></span><span></span><span></span><span></span>
+            </span>
+          </span>
+          <span>Send</span>
+        </button>
+      </div>
+    </div>
+  </form>
+
 </div>
 
 

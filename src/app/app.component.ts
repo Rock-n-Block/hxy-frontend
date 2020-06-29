@@ -18,11 +18,17 @@ export class AppComponent {
   public form2Progress: boolean;
   public form3Progress: boolean;
 
+  public dividendsFundsFormProgress: boolean;
+
   public metaMaskAuth = false;
   public userAddress: string;
   public metaMaskError: string;
   public network: string;
   public formData: {
+    fundsToDividends: {
+      coin?: any;
+      amount?: string
+    },
     send: {
       referralAddress?: string;
       coin: any;
@@ -83,6 +89,8 @@ export class AppComponent {
   public prices: any[];
 
   public onChangeCoinEmitter: EventEmitter<any>;
+  public onChangeDividendsCoinEmitter: EventEmitter<any>;
+
   private contract;
 
   public currentRound: number;
@@ -94,12 +102,17 @@ export class AppComponent {
     private ngZone: NgZone
   ) {
     this.onChangeCoinEmitter = new EventEmitter();
+    this.onChangeDividendsCoinEmitter = new EventEmitter();
+
     this.formData = {
       send: {
         coin: 'HEX'
       },
       want: {
         method: 'freeze'
+      },
+      fundsToDividends: {
+        coin: 'HEX'
       }
     };
     this.rates = {};
@@ -114,6 +127,14 @@ export class AppComponent {
       this.onChangeCoinEmitter.emit('');
     });
   }
+
+  public changeDividendsCoin() {
+    setTimeout(() => {
+      this.onChangeDividendsCoinEmitter.emit('');
+    });
+  }
+
+
 
 
 
@@ -456,6 +477,31 @@ export class AppComponent {
 
   public toDecimals(val, decimals) {
     return new BigNumber(val).div(Math.pow(10, decimals)).toString(10);
+  }
+
+
+  public recordDividends() {
+    let callMethod;
+    this.dividendsFundsFormProgress = true;
+    switch (this.formData.fundsToDividends.coin) {
+      case 'HEX':
+        callMethod = this.contract.recordDividendsHEX(this.formData.fundsToDividends.amount);
+        break;
+      case 'USDC':
+        callMethod = this.contract.recordDividendsUSDC(this.formData.fundsToDividends.amount);
+        break;
+      case 'ETH':
+        callMethod = this.contract.recordDividendsETH(this.formData.fundsToDividends.amount);
+        break;
+      case 'HXY':
+        callMethod = this.contract.recordDividendsHXY(this.formData.fundsToDividends.amount);
+        break;
+    }
+    callMethod.then(() => {
+      this.getAccountBalances();
+    }).finally(() => {
+      this.dividendsFundsFormProgress = false;
+    });
   }
 
   get hxyAmount() {

@@ -241,12 +241,25 @@ export class Contract {
     });
   }
 
+  private checkHXYApproval(amount, address): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.HXYTokenContract.methods.allowance(
+        this.HXYTokenContract.givenProvider.selectedAddress,
+        address
+      ).call().then((allowance: string) => {
+        const allow = new BigNumber(allowance);
+        const allowed = allow.minus(amount);
+        allowed.isNegative() ? reject() : resolve();
+      });
+    });
+  }
 
-  private checkHEXApproval(amount): Promise<any> {
+
+  private checkHEXApproval(amount, address?): Promise<any> {
     return new Promise((resolve, reject) => {
       this.HEXTokenContract.methods.allowance(
         this.HEXTokenContract.givenProvider.selectedAddress,
-        this.HEXExchangeContract.options.address
+        address || this.HEXExchangeContract.options.address
       ).call().then((allowance: string) => {
         const allow = new BigNumber(allowance);
         const allowed = allow.minus(amount);
@@ -290,11 +303,11 @@ export class Contract {
 
 
 
-  private checkUSDCApproval(amount): Promise<any> {
+  private checkUSDCApproval(amount, address?): Promise<any> {
     return new Promise((resolve, reject) => {
       this.USDCTokenContract.methods.allowance(
         this.USDCTokenContract.givenProvider.selectedAddress,
-        this.USDCExchangeContract.options.address
+        address || this.USDCExchangeContract.options.address
       ).call().then((allowance: string) => {
         const allow = new BigNumber(allowance);
         const allowed = allow.minus(amount);
@@ -568,6 +581,99 @@ export class Contract {
 
   }
 
+
+  public recordDividendsHEX(amount) {
+    const fromAccount = this.DividendsContract.givenProvider.selectedAddress;
+
+    const sendTokens = () => {
+      return this.DividendsContract.methods.recordDividendsHEX(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return new Promise((resolve, reject) => {
+      const method = sendTokens;
+      this.checkHEXApproval(amount, this.DividendsContract.options.address).then(() => {
+        method().then(resolve, reject);
+      }, () => {
+        this.HEXTokenContract.methods.approve(this.DividendsContract.options.address, amount).send({
+          from: fromAccount
+        }).then(() => {
+          method().then(resolve, reject);
+        }, reject);
+      });
+    });
+  }
+
+  public recordDividendsUSDC(amount) {
+    const fromAccount = this.DividendsContract.givenProvider.selectedAddress;
+
+    const sendTokens = () => {
+      return this.DividendsContract.methods.recordDividendsUSDC(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return new Promise((resolve, reject) => {
+      const method = sendTokens;
+      this.checkUSDCApproval(amount, this.DividendsContract.options.address).then(() => {
+        method().then(resolve, reject);
+      }, () => {
+        this.USDCTokenContract.methods.approve(this.DividendsContract.options.address, amount).send({
+          from: fromAccount
+        }).then(() => {
+          method().then(resolve, reject);
+        }, reject);
+      });
+    });
+  }
+
+  public recordDividendsHXY(amount) {
+    const fromAccount = this.DividendsContract.givenProvider.selectedAddress;
+
+    const sendTokens = () => {
+      return this.DividendsContract.methods.recordDividendsHXY(amount).send({
+        from: fromAccount
+      }).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+
+    return new Promise((resolve, reject) => {
+      const method = sendTokens;
+      this.checkHXYApproval(amount, this.DividendsContract.options.address).then(() => {
+        method().then(resolve, reject);
+      }, () => {
+        this.HXYTokenContract.methods.approve(this.DividendsContract.options.address, amount).send({
+          from: fromAccount
+        }).then(() => {
+          method().then(resolve, reject);
+        }, reject);
+      });
+    });
+  }
+
+
+  public recordDividendsETH(amount) {
+
+    const txParams = {
+      value: amount,
+      from: this.DividendsContract.givenProvider.selectedAddress,
+      to: this.DividendsContract.options.address
+    };
+    const exchangeTokens = () => {
+      return this.DividendsContract.methods.recordDividendsETH().send(txParams).then((res) => {
+        return this.checkTransaction(res);
+      });
+    };
+    return exchangeTokens().then((res) => {
+      return this.checkTransaction(res);
+    });
+  }
 
 
 }
